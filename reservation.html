@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      html.tpl-loading body {
+        opacity: 0;
+      }
+      body {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+    </style>
+    <script>
+      document.documentElement.classList.add('tpl-loading');
+      window.__tplReveal = function () {
+        document.documentElement.classList.remove('tpl-loading');
+      };
+      setTimeout(function () {
+        window.__tplReveal && window.__tplReveal();
+      }, 3000);
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:type" content="website" />
+    <title data-page-title>보령 티라셀 오션뷰 펜션 - 예약안내</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" type="text/css" href="styles/theme.css" />
+    <link rel="stylesheet" type="text/css" href="styles/reset.css" />
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="styles/popup.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <!-- Open Graph Meta Tags for Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="보령 티라셀 오션뷰 펜션 - 예약안내" />
+  <meta property="og:description" content="바다와 함께 청량한 하루를 시작하는 보령 티라셀 오션뷰 펜션입니다. 전 객실 오션뷰엔 유명한 무창포 해수욕장이 펼쳐져 있습니다." />
+  <meta property="og:image" content="https://bookingplay-media.s3.amazonaws.com/item_images/2026/08/04/C0evJ43Hs26y.jpg" />
+  <meta property="og:url" content="https://thirasel.kr" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="보령 티라셀 오션뷰 펜션 - 예약안내" />
+  <meta name="twitter:description" content="바다와 함께 청량한 하루를 시작하는 보령 티라셀 오션뷰 펜션입니다. 전 객실 오션뷰엔 유명한 무창포 해수욕장이 펼쳐져 있습니다." />
+  <meta name="twitter:image" content="https://bookingplay-media.s3.amazonaws.com/item_images/2026/08/04/C0evJ43Hs26y.jpg" />
+  <meta name="naver-site-verification" content="f9d765be987eb11a5b87c35f4fa87b837d918b1f" />
+  <meta name="google-site-verification" content="kFdAp2rByTI9cLS4b0eUF4KNxJARBL4_2TMkH0nu5tc" />
+</head>
+
+  <body oncontextmenu="return false;" onselectstart="return false" ondragstart="return false;">
+    <div id="wrap">
+      <div id="header-wrap"></div>
+
+      <div id="container">
+        <!-- 원본 reservation.html (#content.sub4_1). 슬라이더가 없는 정적 페이지다. -->
+        <section id="content" class="sub4_1 sub_reserve">
+          <!-- ── 히어로 — 슬라이더가 아닌 고정 배경 ──────────────── -->
+          <div class="sub_visual_wide" data-reservation-hero>
+            <div class="visual_box">
+              <div class="visual_txt">
+                <strong>RESERVE</strong>
+                <p data-reservation-hero-description></p>
+              </div>
+            </div>
+          </div>
+          <!--// sub_visual -->
+
+          <div class="sub_location_wrap">
+            <div class="inner">
+              <ul class="location_box">
+                <li>홈</li>
+                <li>RESERVE</li>
+                <li><a href="./reservation.html">이용안내</a></li>
+              </ul>
+              <ul class="cate_box">
+                <li><a href="#!" target="_blank" data-booking-link>예약하기</a></li>
+                <li class="on"><a href="./reservation.html">이용안내</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sub_cont inner">
+            <dl class="info_wrap">
+              <dt class="sub_title_box"><h4>INFORMATION</h4></dt>
+              <dd>
+                <div class="img" data-reservation-info-image></div>
+                <p>
+                  <strong>펜션정보</strong>
+                  <span data-reservation-info-body></span>
+                </p>
+              </dd>
+
+              <!-- ⚠️ 두 번째 dd 의 p 는 CSS 가 이미지 위에 반투명 박스로 얹는다
+                   (.info_wrap dd + dt + dd p — position:absolute).
+                   환불 규정처럼 짧은 글만 들어갈 수 있는 자리다. -->
+              <dt class="sub_title_box"><h4>REFUND INFO</h4></dt>
+              <dd>
+                <div class="img" data-reservation-refund-image></div>
+                <p>
+                  <strong>환불정보</strong>
+                  <span data-reservation-refund-body></span>
+                </p>
+              </dd>
+            </dl>
+          </div>
+          <!--// sub_cont -->
+        </section>
+      </div>
+      <!--// container -->
+
+      <div id="footer-wrap"></div>
+    </div>
+
+    <div id="popup-container"></div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="js/image-helpers.js"></script>
+    <script src="js/preview-handler.js"></script>
+    <script src="js/data-mapper/core/base-mapper.js"></script>
+    <script src="js/data-mapper/pages/header-footer-mapper.js"></script>
+    <script src="js/data-mapper/pages/reservation-mapper.js"></script>
+    <script src="js/header-footer-loader.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/popup.js"></script>
+  </body>
+</html>

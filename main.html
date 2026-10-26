@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      html.tpl-loading body {
+        opacity: 0;
+      }
+      body {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+    </style>
+    <script>
+      document.documentElement.classList.add('tpl-loading');
+      window.__tplReveal = function () {
+        document.documentElement.classList.remove('tpl-loading');
+      };
+      setTimeout(function () {
+        window.__tplReveal && window.__tplReveal();
+      }, 3000);
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:type" content="website" />
+    <title data-page-title>보령 티라셀 오션뷰 펜션 - 숙소소개</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" type="text/css" href="styles/theme.css" />
+    <link rel="stylesheet" type="text/css" href="styles/reset.css" />
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="styles/popup.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <!-- Open Graph Meta Tags for Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="보령 티라셀 오션뷰 펜션 - 숙소소개" />
+  <meta property="og:description" content="바다와 함께 청량한 하루를 시작하는 보령 티라셀 오션뷰 펜션입니다. 전 객실 오션뷰엔 유명한 무창포 해수욕장이 펼쳐져 있습니다." />
+  <meta property="og:image" content="https://bookingplay-media.s3.amazonaws.com/item_images/2026/08/04/C0evJ43Hs26y.jpg" />
+  <meta property="og:url" content="https://thirasel.kr" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="보령 티라셀 오션뷰 펜션 - 숙소소개" />
+  <meta name="twitter:description" content="바다와 함께 청량한 하루를 시작하는 보령 티라셀 오션뷰 펜션입니다. 전 객실 오션뷰엔 유명한 무창포 해수욕장이 펼쳐져 있습니다." />
+  <meta name="twitter:image" content="https://bookingplay-media.s3.amazonaws.com/item_images/2026/08/04/C0evJ43Hs26y.jpg" />
+  <meta name="naver-site-verification" content="f9d765be987eb11a5b87c35f4fa87b837d918b1f" />
+  <meta name="google-site-verification" content="kFdAp2rByTI9cLS4b0eUF4KNxJARBL4_2TMkH0nu5tc" />
+</head>
+
+  <body oncontextmenu="return false;" onselectstart="return false" ondragstart="return false;">
+    <div id="wrap">
+      <div id="header-wrap"></div>
+
+      <div id="container">
+        <!-- 원본 about.html(sub1_1) + view.html(sub1_2) 을 합친 페이지.
+             골격은 view.html 을 쓰고, about.html 에서는 .sub_wide_bnr 하나만 가져왔다.
+             about + view 가 한 페이지가 되어 탭(.sub_location_wrap)은 뺐다. -->
+        <section id="content" class="sub1_2 sub_view">
+          <!-- ── 히어로 (외경 슬라이더) ────────────────────────── -->
+          <div class="sub_visual visual">
+            <div class="visual_txt">
+              <span data-property-name-en></span>
+              <!-- 원본은 LANDSCAPE. about 과 합친 페이지라 ABOUT 으로 둔다 -->
+              <strong>ABOUT</strong>
+              <p data-main-visual-description></p>
+            </div>
+            <div class="arw_box">
+              <div
+                class="swiper-button-prev"
+                style="
+                  background: url(images/common/left_btn.png) no-repeat 0 0;
+                  background-size: auto 100%;
+                "
+              ></div>
+              <div
+                class="swiper-button-next"
+                style="
+                  background: url(images/common/right_btn.png) no-repeat 100%;
+                  background-size: auto 100%;
+                "
+              ></div>
+            </div>
+            <div class="visual_box">
+              <div class="swiper-container">
+                <div class="swiper-wrapper" data-main-visual-slides></div>
+              </div>
+            </div>
+          </div>
+          <!--// sub_visual -->
+
+          <!-- about + view 를 합쳐 탭은 '펜션소개' 하나뿐이다. 원본의 '외경보기'
+               탭은 두지 않는다(같은 페이지를 가리키게 된다).
+               탭을 남기는 건 메뉴 표시 때문만이 아니다. `.sub_visual +
+               .sub_location_wrap` 의 margin-top:-48px 이 히어로 위로 올라타면서
+               히어로와 아래 소개 배너 사이를 끊어 준다. 빼면 둘이 붙어 버린다. -->
+          <div class="sub_location_wrap">
+            <div class="inner">
+              <ul class="cate_box">
+                <li class="on"><a href="./main.html">펜션소개</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sub_cont">
+            <!-- ── 환영 제목 (about.html) ──────────────────────────
+                 원본 about.html 에서 .sub_wide_bnr 바로 위에 있던 제목이다.
+                 padding:100px 0 30px 을 갖고 있어 탭 흰 띠와 배너 사이 여백도
+                 이 블록이 만든다. -->
+            <div class="sub_title_box" data-main-welcome>
+              <h3 data-property-name-en></h3>
+              <p data-main-welcome-lead></p>
+            </div>
+
+            <!-- ── 숙소 소개 배너 (hero) — about.html 에서 가져온 영역 ── -->
+            <div class="sub_wide_bnr" data-main-intro>
+              <div class="txt_box">
+                <strong data-main-intro-title></strong>
+                <p data-main-intro-description></p>
+              </div>
+            </div>
+
+            <!-- ── 외경 (about[]) ──────────────────────────────── -->
+            <div class="sub_title_box" data-main-about-heading>
+              <!-- 위 환영 제목이 이미 영문 숙소명이라, 여기는 원본 view.html 대로
+                   LANDSCAPE 를 쓴다. 같은 이름이 두 번 나오지 않게 한다. -->
+              <h3>LANDSCAPE</h3>
+              <p data-main-about-lead></p>
+            </div>
+            <div data-main-about-blocks></div>
+
+            <!-- ── 마무리 배너 ─────────────────────────────────── -->
+            <div class="view_wide_bnr" data-main-closing>
+              <div>
+                <strong data-main-closing-title></strong>
+                <p>잊지 못할 추억을 선물합니다.</p>
+              </div>
+            </div>
+          </div>
+          <!--// sub_cont -->
+        </section>
+      </div>
+      <!--// container -->
+
+      <div id="footer-wrap"></div>
+    </div>
+
+    <div id="popup-container"></div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="js/image-helpers.js"></script>
+    <script src="js/preview-handler.js"></script>
+    <script src="js/data-mapper/core/base-mapper.js"></script>
+    <script src="js/data-mapper/pages/header-footer-mapper.js"></script>
+    <script src="js/data-mapper/pages/main-mapper.js"></script>
+    <script src="js/header-footer-loader.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/pages/main.js"></script>
+    <script src="js/popup.js"></script>
+  </body>
+</html>

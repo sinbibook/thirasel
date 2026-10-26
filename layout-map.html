@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      html.tpl-loading body {
+        opacity: 0;
+      }
+      body {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+    </style>
+    <script>
+      document.documentElement.classList.add('tpl-loading');
+      window.__tplReveal = function () {
+        document.documentElement.classList.remove('tpl-loading');
+      };
+      setTimeout(function () {
+        window.__tplReveal && window.__tplReveal();
+      }, 3000);
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:type" content="website" />
+    <title data-page-title>보령 티라셀 오션뷰 펜션</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" type="text/css" href="styles/theme.css" />
+    <link rel="stylesheet" type="text/css" href="styles/reset.css" />
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="styles/popup.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <!-- Open Graph Meta Tags for Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="보령 티라셀 오션뷰 펜션" />
+  <meta property="og:description" content="바다와 함께 청량한 하루를 시작하는 보령 티라셀 오션뷰 펜션입니다. 전 객실 오션뷰엔 유명한 무창포 해수욕장이 펼쳐져 있습니다." />
+  <meta property="og:image" content="https://bookingplay-media.s3.amazonaws.com/item_images/2026/08/04/C0evJ43Hs26y.jpg" />
+  <meta property="og:url" content="https://thirasel.kr" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="보령 티라셀 오션뷰 펜션" />
+  <meta name="twitter:description" content="바다와 함께 청량한 하루를 시작하는 보령 티라셀 오션뷰 펜션입니다. 전 객실 오션뷰엔 유명한 무창포 해수욕장이 펼쳐져 있습니다." />
+  <meta name="twitter:image" content="https://bookingplay-media.s3.amazonaws.com/item_images/2026/08/04/C0evJ43Hs26y.jpg" />
+  <meta name="naver-site-verification" content="f9d765be987eb11a5b87c35f4fa87b837d918b1f" />
+  <meta name="google-site-verification" content="kFdAp2rByTI9cLS4b0eUF4KNxJARBL4_2TMkH0nu5tc" />
+</head>
+
+  <body oncontextmenu="return false;" onselectstart="return false" ondragstart="return false;">
+    <div id="wrap">
+      <div id="header-wrap"></div>
+
+      <div id="container">
+        <!-- 원본 room.html 의 목록 화면(#content.sub2_1)이다.
+             .sub2_1 스코프가 .room_list 를 2열 float 그리드로 바꾸고 화살표를
+             숨기므로 이 페이지에는 Swiper 를 만들지 않는다 (원본 custom.js 와 동일). -->
+        <section id="content" class="sub2_1 sub_room">
+          <!-- ── 히어로 (hero) — 슬라이더가 아닌 고정 배경 ────────── -->
+          <div class="sub_visual_wide" data-layoutmap-hero>
+            <div class="visual_box">
+              <div class="visual_txt">
+                <strong data-layoutmap-hero-title></strong>
+                <p data-layoutmap-hero-description></p>
+              </div>
+            </div>
+          </div>
+          <!--// sub_visual -->
+
+          <div class="sub_location_wrap">
+            <div class="inner">
+              <ul class="location_box">
+                <li>홈</li>
+                <li>ROOMS</li>
+                <li><a href="./layout-map.html">미리보기</a></li>
+              </ul>
+              <!-- 객실 탭. '미리보기' li 는 정적이고 뒤로 renderRoomNav 가 생성한다.
+                   그룹이 있으면 그룹명이, 없으면 객실명이 항목이 된다. -->
+              <ul class="cate_box" data-layoutmap-room-nav>
+                <li class="on"><a href="./layout-map.html">미리보기</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sub_cont inner">
+            <!-- ── 배치도 (about) ──────────────────────────────── -->
+            <div class="sub_title_box">
+              <h3 data-layoutmap-title></h3>
+              <p data-layoutmap-description></p>
+            </div>
+            <div class="wide_img" data-layoutmap-images></div>
+
+            <!-- ── 객실 목록 (roomtypes) ───────────────────────── -->
+            <div class="main_room">
+              <div class="title_box">
+                <h3>ROOMS LIST</h3>
+                <p data-layoutmap-room-lead></p>
+              </div>
+              <div class="room_list">
+                <div class="swiper-container">
+                  <div class="swiper-wrapper" data-layoutmap-room-slides></div>
+                </div>
+                <!-- .sub2_1 스코프가 display:none 으로 숨긴다. 2열 그리드라 넘길 게 없다.
+                     원본 마크업을 그대로 두어 다른 페이지와 구조를 맞춘다. -->
+                <div class="arw_box">
+                  <div
+                    class="swiper-button-prev"
+                    style="background: url(images/common/room_pre.png) no-repeat 25% 50% #fff"
+                  >
+                    Prev
+                  </div>
+                  <div
+                    class="swiper-button-next"
+                    style="background: url(images/common/l_le.png) no-repeat 75% 50% #fff"
+                  >
+                    Next
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--// sub_cont -->
+        </section>
+      </div>
+      <!--// container -->
+
+      <div id="footer-wrap"></div>
+    </div>
+
+    <div id="popup-container"></div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="js/image-helpers.js"></script>
+    <script src="js/preview-handler.js"></script>
+    <script src="js/data-mapper/core/base-mapper.js"></script>
+    <script src="js/data-mapper/pages/header-footer-mapper.js"></script>
+    <script src="js/data-mapper/pages/layout-map-mapper.js"></script>
+    <script src="js/header-footer-loader.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/popup.js"></script>
+  </body>
+</html>

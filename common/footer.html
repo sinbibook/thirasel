@@ -1,0 +1,67 @@
+<div class="footer_wrap">
+  <div class="footer">
+    <!-- data-* 속성 : data-footer-rural-stay-mark-wrap (customFields.footer.ruralStayMark 가 있을 때만 노출, 기본 숨김)
+         data-footer-rural-stay-mark : 농어촌민박사업자 이미지 (표시마크 + 신고번호, alt = description) -->
+    <div class="ft_rural_stay_mark_wrap" data-footer-rural-stay-mark-wrap style="display: none">
+      <img class="ft_rural_stay_mark" src="" alt="농어촌민박사업자" data-footer-rural-stay-mark />
+    </div>
+    <div class="tel">
+      <a href="tel:" data-footer-phone-link>
+        T.
+        <span data-footer-phone></span>
+      </a>
+    </div>
+    <div class="address">
+      <p>
+        주소 :
+        <span data-footer-address></span>
+      </p>
+      <p>
+        업체명 :
+        <span data-footer-business-name></span>
+      </p>
+      <br class="for_m" />
+      <p>
+        대표자 :
+        <span data-footer-representative></span>
+      </p>
+      <p>
+        사업자번호 :
+        <span data-footer-business-number></span>
+      </p>
+      <p data-ybs-wrap>
+        <a href="#!" target="_blank" data-ybs-button><span>야놀자 YBS</span></a>
+      </p>
+
+      <a
+        href="http://design.trip11.net/privacy/privacy_policy.html"
+        class="privacy"
+        target="_blank"
+      >
+        개인정보처리방침
+      </a>
+    </div>
+  </div>
+  <div class="copy">
+    <a href="http://trip11.kr/" target="_blank" data-copyright="COPYRIGHT©{provider}. ALL RIGHTS RESERVED.">COPYRIGHT©(주)트립일레븐. ALL RIGHTS RESERVED.</a>
+  </div>
+</div>
+
+<!-- 우측 하단 플로팅 버튼 2개. 상담하기(아래) + 예약하기(위) 순으로 쌓인다.
+     예약하기는 `for_m` 이라 모바일에서만 뜨고, 상담하기는 총판A + tripPropertyId 가
+     있을 때 전 화면폭에서 뜬다 (header-footer-mapper.mapConsult). -->
+
+<!-- data-* 속성 : data-consult-button (property.tripPropertyId + partnerType)
+     상담 URL 은 `https://www.bookingplay.co.kr/api/cti_eicn/kakao_happy_talk?tid={tripPropertyId}` -->
+<div id="talk_custom_button" data-consult-wrap>
+  <a title="상담하기" href="#!" target="_blank" data-consult-button>
+    <img src="images/common/consult.png" alt="상담하기" />
+  </a>
+</div>
+
+<!-- data-* 속성 : data-booking-link (property.realtimeBookingId) -->
+<div class="ft_btn_reserve for_m on">
+  <a title="예약하기" href="#!" target="_blank" data-booking-link>
+    <img src="images/common/talk.png" alt="예약하기" />
+  </a>
+</div>

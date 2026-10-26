@@ -1,0 +1,11 @@
+/* CDN Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+/* CSS Variables */
+:root {
+  --font-ko-main: 'Noto Sans KR';
+  --font-ko-sub: 'Noto Sans KR';
+  --font-en-main: 'Oswald';
+  --color-primary: #FFFFFF;
+  --color-secondary: #1187B4;
+}

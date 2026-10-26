@@ -1,0 +1,3478 @@
+@charset "UTF-8";
+/* ============================================================
+   style.css — t-template-H
+   원본: udosky.kr /css/style.css (정본)
+   대조: gpcaravan.co.kr /css/style.css — 같은 원본의 색만 다른 판본
+
+   두 판본의 차이는 58줄뿐이고 그중 의미 있는 축은 브랜드 포인트 색 하나
+   (udosky #0187cc / gpcaravan #8eb049)뿐이다. 나머지 차이(hd_lnb_bg 높이,
+   ft_btn_reserve 위치, sub_visual 여백 등)는 사이트별 미세 조정이라
+   정본인 udosky 값을 따른다.
+
+   토큰 값은 하나씩만 둔다. 폴백은 사용처에서 붙인다.
+     예) font-family: var(--font-en-main), sans-serif;
+
+   상세 근거(사용처 전수 조사 / 하드코딩으로 남긴 값)는
+   data-mapping.md 의 「테마 색상/폰트」 참고.
+   ============================================================ */
+
+/*** 공통 ***/
+.clear:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.dn {
+  display: none;
+}
+.for_pc {
+  display: inline-block;
+}
+.for_m {
+  display: none;
+}
+.ff_noto_serif {
+  font-family: var(--font-ko-sub), serif !important;
+}
+.ff_notokr {
+  font-family: var(--font-ko-main), sans-serif !important;
+}
+
+@media screen and (max-width: 640px) {
+  .for_pc {
+    display: none;
+  }
+  .for_m {
+    display: block;
+  }
+}
+
+/*** 레이아웃 ***/
+#wrap {
+  min-width: 280px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.inner {
+  width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+@media only screen and (max-width: 1200px) {
+  .inner {
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (max-width: 860px) {
+  .inner {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/*** 상단 ***/
+.header,
+.header * {
+  transition: all 0.3s;
+}
+.header {
+  z-index: 90;
+  position: fixed;
+  width: 100%;
+}
+.header .hd_cont {
+  left: 0;
+  top: 0;
+  right: 0;
+  z-index: 91;
+  background: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.header .hd_inner {
+  text-align: center;
+  width: 1140px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+.header .hd_inner:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.header .logo {
+  font-size: 28px;
+  display: inline-block;
+  vertical-align: middle;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  text-align: center;
+  z-index: 90;
+  transition: none;
+}
+.header .logo a,
+.header .logo2 a {
+  /* [템플릿 확장] 원본은 <a> 안에 텍스트 노드가 바로 있어 인라인이 맞았다.
+     우리 마크업은 자식이 전부 block(img / .logo_text / .logo_sub)이라,
+     인라인인 채로 두면 그 사이 줄바꿈 공백이 line-height 만큼(22px) 줄 상자를
+     만들어 로고 높이가 두 배가 되고 헤더가 그만큼 부푼다. */
+  display: block;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0px;
+  color: var(--color-secondary);
+  font-family: var(--font-en-main), var(--font-ko-main), sans-serif;
+}
+.header .logo .logo_sub {
+  display: block;
+  font-family: var(--font-ko-main), sans-serif;
+  font-size: 13px;
+  line-height: 1;
+  margin-top: 5px;
+  font-weight: normal;
+  color: #666;
+}
+/* [템플릿 확장] 원본 로고는 텍스트 전용이었다. 백오피스가 로고 이미지를 주면
+   그림으로 대체되므로 높이를 헤더에 맞춰 제한한다. 텍스트/이미지 중
+   무엇을 보일지는 header-footer-mapper 의 applyLogo 가 정한다. */
+.header .logo a img,
+.header .logo2 a img {
+  display: block;
+  max-height: 52px;
+  width: auto;
+}
+.header .logo .logo_text,
+.header .logo2 .logo_text {
+  display: block;
+  /* reset.css 가 span 에 color:#333 을 직접 선언해서 부모 <a> 의
+     var(--color-secondary) 상속이 씹힌다 — 여기서 명시적으로 되살린다. */
+  color: var(--color-secondary);
+}
+.header .logo2 {
+  font-size: 28px;
+  vertical-align: middle;
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  z-index: 90;
+  transform: translateY(-50%);
+  transition: none;
+}
+.header .hd_lnb:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.header .hd_lnb ul,
+.header .hd_lnb ul .depth1 {
+  display: inline-block;
+  vertical-align: middle;
+}
+.header .hd_lnb ul .depth1 {
+  font-size: 16px;
+  position: relative;
+  text-align: center;
+}
+.header .hd_lnb ul .depth1 .depth1_a {
+  line-height: 6.93;
+  padding: 0 1.25em;
+  width: 80px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: inherit;
+  display: block;
+  color: #555;
+  transition: none;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+  position: relative;
+  z-index: 5;
+  background: #fff;
+}
+/* ⚠️ 원본은 닫힘 상태를 top:-370% 로만 처리했다. 절대 위치 요소의 top 백분율은
+   자기 높이가 아니라 부모(.depth1, 약 111px) 기준이라 사실상 -410px 고정이다.
+   원본은 서브메뉴가 2~4개뿐이라 충분했지만, 객실이 많아 목록이 410px 를 넘으면
+   아래쪽이 헤더 밖으로 삐져나온다. 그 부분은 뒤에 흰 헤더 배경이 없어
+   흰 글자가 페이지 위에 그대로 보인다.
+   높이와 무관하게 닫히도록 visibility / opacity 를 함께 쓴다. */
+.header .hd_lnb ul .depth1 .depth_box {
+  position: absolute;
+  left: 50%;
+  top: -370%;
+  width: 100%;
+  transform: translateX(-50%);
+  z-index: -1;
+  text-align: center;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s;
+}
+.header .hd_lnb ul .depth1 .depth_box.on {
+  top: calc(100% + 12px);
+  visibility: visible;
+  opacity: 1;
+}
+.header .hd_lnb ul .depth1 .depth_box li {
+  font-size: 14px;
+  line-height: 1;
+  padding: 5px 0;
+  color: #fff;
+}
+.header .hd_lnb ul .depth1 .depth_box li + li {
+  margin-top: 5px;
+}
+.header .hd_lnb ul .depth1 .depth_box li a {
+  display: block;
+  font-size: inherit;
+  color: inherit;
+}
+.header .hd_lnb ul .depth1 .depth_box li a:hover {
+  text-decoration: underline;
+}
+/* 객실이 많으면 js/common.js 가 이 목록을 잘라 스크롤시킨다.
+   반투명 브랜드색 판 위 흰 글자라 스크롤바도 흰색으로 맞춘다.
+   트랙은 투명하게 지우고, 잡는 영역 10px 안에서 손잡이만 4px 로 보이게 한다.
+   (.cate_box 스크롤바와 같은 방식 — 그쪽은 밝은 바탕이라 검정 반투명이다)
+
+   ⚠️ Chrome 121+ 는 scrollbar-width / scrollbar-color 가 지정되면
+   ::-webkit-scrollbar-* 를 통째로 무시하므로, 표준 속성은 그것을 모르는
+   브라우저(Firefox)에만 준다. */
+@supports not selector(::-webkit-scrollbar) {
+  .header .hd_lnb ul .depth1 .depth_box {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+  }
+}
+.header .hd_lnb ul .depth1 .depth_box::-webkit-scrollbar {
+  width: 10px;
+  background: transparent;
+}
+.header .hd_lnb ul .depth1 .depth_box::-webkit-scrollbar-track {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+.header .hd_lnb ul .depth1 .depth_box::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.5);
+  background-clip: content-box;
+  border: 3px solid transparent;
+  border-radius: 10px;
+}
+/* 브라우저 기본값은 hover 시 색을 바꾼다. 같은 값을 명시해 고정한다 */
+.header .hd_lnb ul .depth1 .depth_box::-webkit-scrollbar-thumb:hover,
+.header .hd_lnb ul .depth1 .depth_box::-webkit-scrollbar-thumb:active {
+  background: rgba(255, 255, 255, 0.5);
+  background-clip: content-box;
+}
+.header .hd_lnb .hd_lnb01 {
+  float: left;
+}
+.header .hd_lnb .hd_lnb02 {
+  float: right;
+}
+.header .hd_lnb_bg {
+  position: absolute;
+  left: 0;
+  top: -400px;
+  right: 0;
+  background: rgba(1, 135, 204, 0.8);
+  background: color-mix(in srgb, var(--color-secondary) 80%, transparent);
+  z-index: -1;
+  overflow: hidden;
+  box-sizing: border-box;
+  height: 400px;
+  transition: all 0.5s;
+}
+.header .hd_lnb_bg.on {
+  top: 110px;
+}
+.header .btn_hd_res {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.header .btn_hd_res a {
+  display: inline-block;
+  font-size: 16px;
+  line-height: 2.125;
+  padding: 0 1.625em;
+  color: #fff;
+  background: var(--color-secondary);
+}
+.header .btn_hd_res:hover {
+  text-decoration: underline;
+}
+.header .btn_menu {
+  display: inline-block;
+  height: 23px;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+.header .btn_menu img {
+  height: 100%;
+}
+/* 상단 on */
+.header.on {
+  background: #fff;
+}
+.header.on .hd_lnb,
+.header.on .btn_hd_res {
+  display: inline-block;
+  vertical-align: middle;
+}
+.header.on .hd_inner {
+  width: calc(100% - 90px);
+  margin: 0 auto;
+  text-align: left;
+}
+.header.on .hd_lnb,
+.header.on .btn_hd_res {
+  display: inline-block;
+  vertical-align: middle;
+}
+.header.on .hd_lnb {
+  padding-left: 235px;
+}
+.header.on .hd_lnb ul .depth1 .depth1_a {
+  line-height: 5.3125;
+}
+.header.on .hd_lnb .hd_lnb01,
+.header.on .hd_lnb .hd_lnb02 {
+  float: inherit;
+}
+.header.on .hd_lnb_bg.on {
+  top: 86px;
+}
+/* 카테고리 */
+.header .btn_hd_res,
+.header .btn_menu,
+.aside .btn_close,
+.aside_bg {
+  display: none;
+}
+.aside .aisde_inner {
+  position: fixed;
+  right: -100%;
+  top: 0;
+  height: 100%;
+  z-index: 991;
+  width: calc(100% - 14%);
+  overflow-y: auto;
+  background: #fff;
+  transition: all 0.5s;
+  transition-timing-function: ease-in-out;
+}
+.aside.on .aisde_inner {
+  right: 0;
+}
+.aside .aside_box {
+  height: 100%;
+  padding: 10px 0 0;
+}
+/* [템플릿 확장] 원본은 absolute 라 기준 조상이 없어 스크롤하면 문서 좌상단에 남았다.
+   fixed 로 화면 좌상단(패널 왼쪽 14% 어두운 영역)에 붙이고, aside_bg(900) 위로 올린다. */
+.aside .btn_close {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  width: 27px;
+  height: 27px;
+  background-size: contain;
+  z-index: 992;
+}
+.aside.on .btn_close {
+  display: block;
+}
+.aside .depth1 {
+  font-size: 17px;
+  line-height: 3.47;
+  padding: 0 1.47em;
+  letter-spacing: 1px;
+  color: #444;
+  display: block;
+  border-bottom: 1px solid #e5e5e5;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+}
+.aside .depth_list {
+  display: none;
+  transition: none;
+  background: #fafafa;
+}
+.aside .depth_list li {
+  border-bottom: 1px solid #e5e5e5;
+}
+.aside .depth_list li a {
+  font-size: 15px;
+  line-height: 3.2;
+  padding: 0 1.47em;
+  display: block;
+  color: #666;
+}
+.aside .btn_aside_res {
+  padding: 20px;
+}
+.aside .btn_aside_res a {
+  padding: 12px;
+  font-size: 15px;
+  color: #fff;
+  background: var(--color-secondary);
+  text-align: center;
+  display: block;
+}
+.aside_bg {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  background: rgba(0, 0, 0, 0.4);
+  transition: all 0.5s;
+}
+.aside_bg.on {
+  display: block;
+}
+
+@media screen and (max-width: 1280px) {
+  .header .hd_inner,
+  .header.on .hd_inner {
+    width: calc(100% - 90px);
+  }
+  .header .logo,
+  .header .logo2 a {
+    font-size: 25px;
+  }
+  .header .hd_lnb ul .depth1,
+  .header .btn_hd_res a {
+    font-size: 15px;
+  }
+  .header.on .hd_lnb {
+    padding-left: 215px;
+  }
+  .header .hd_lnb_bg.on {
+    top: 104px;
+  }
+  .header.on .hd_lnb_bg.on {
+    top: 80px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .header .logo,
+  .header .logo2 a {
+    font-size: 20px;
+  }
+  .header .hd_lnb ul .depth1,
+  .header .btn_hd_res a {
+    font-size: 14px;
+  }
+  .header .hd_lnb ul .depth1 .depth1_a {
+    width: auto;
+  }
+  .header.on .hd_lnb {
+    padding-left: 160px;
+  }
+  .header .hd_lnb ul .depth1 .depth_box li {
+    font-size: 13px;
+  }
+  .header .hd_lnb_bg.on {
+    top: 98px;
+  }
+  .header.on .hd_lnb_bg.on {
+    top: 75px;
+  }
+}
+@media only screen and (max-width: 1023px) {
+  .header .hd_inner,
+  .header.on .hd_inner {
+    width: calc(100% - 60px);
+  }
+  .header .hd_lnb ul .depth1 .depth1_a {
+    padding: 0 1em;
+  }
+  .header .btn_hd_res a {
+    padding: 0 1.2em;
+  }
+  .header.on .hd_lnb {
+    padding-left: 140px;
+  }
+}
+@media only screen and (max-width: 860px) {
+  /* [템플릿 확장] 원본은 padding:19px 0 으로 높이를 만들었다(19+22+19 = 60px).
+     로고가 텍스트(22px)일 때는 맞지만, 백오피스 로고 이미지가 들어오면
+     22px 안에 갇혀 글자가 안 읽힌다. 높이를 60px 로 고정하고 로고를 세로
+     가운데에 두어, 로고가 이미지든 텍스트든 헤더 높이가 일정하게 유지되도록 한다. */
+  .header .hd_inner {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 0;
+    text-align: left;
+  }
+  .header .logo,
+  .header .logo2 a {
+    font-size: 22px;
+    position: static;
+    transform: none;
+    display: inline-block !important;
+    opacity: 1 !important;
+  }
+  .header.on .logo2 {
+    display: none !important;
+  }
+  /* 고정된 60px 헤더 안에서 위아래 7.5px 씩 여백을 남기는 크기.
+     가로로 매우 긴 로고는 reset.css 의 img{max-width:100%} 가 먼저 걸려
+     높이가 자동으로 줄어들므로 넘치지 않는다. */
+  .header .logo a img,
+  .header .logo2 a img {
+    max-height: 45px;
+  }
+  /* ⚠️ 원본은 `.header .logo span` 이었다. 원본 로고는 `이름<span>부제</span>`
+     구조라 그 선택자가 부제만 가렸지만, 우리 마크업은 이름도 `.logo_text`
+     span 이라 로고가 통째로 사라졌다(모바일 헤더가 빈 채로 높이만 남음).
+     부제(.logo_sub)만 가리도록 좁힌다. */
+  .header .logo .logo_sub,
+  .header .hd_lnb_bg.on,
+  .header.on .hd_lnb_bg.on {
+    display: none;
+  }
+  .header .hd_lnb,
+  .header.on .hd_lnb,
+  .header.on .btn_hd_res {
+    display: none;
+  }
+  .header .btn_menu {
+    display: inline-block;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .header .hd_inner,
+  .header.on .hd_inner {
+    width: calc(100% - 30px);
+  }
+  .aside .depth1 {
+    font-size: 15px;
+  }
+  .aside .depth_list li a {
+    font-size: 13px;
+  }
+  .aside_btm li {
+    width: 40px;
+    height: 40px;
+  }
+}
+@media only screen and (max-width: 479px) {
+  .aside {
+    width: calc(100% - 50px);
+  }
+}
+
+/* ── 헤더 네이버·인스타그램 버튼 (템플릿 확장) ───────────────────
+   homepage.socialLinks.blog / .instagram 값이 있을 때만 매퍼가 노출한다(마크업 기본 숨김).
+   마크업은 `.hd_inner` 마지막 `.hd_sns` 하나이고 상태별로 위치만 바꾼다.
+   - 상단(스크롤 0, 861px 이상): 오른쪽 메뉴 끝 LOCATION 오른쪽. 그만큼 `.hd_lnb02` 를 왼쪽으로 민다.
+     로고가 정가운데라 밀린 만큼 로고와 RESERVE 사이가 좁아지므로 메뉴 좌우 여백을 1.25em → 0.75em.
+   - 스크롤(.header.on): 예약하기 바로 앞(right = 예약하기 폭 + 14px).
+   - 860px 이하: ☰ 바로 앞(right = ☰ 23px + 14px).
+   - 479px 이하: 헤더에서 숨기고 aside 맨 아래(.aside_sns)에 보인다 — 로고 폭을 건드리지 않는다.
+   크기: PC 26px(스크롤 상태 예약하기 30~34px 보다 작게) / 861~1023 상단 22px / 모바일 24px(☰ 와 같은 높이).
+   인스타 로고는 122x126 이라 높이만 고정하고 폭은 비율대로 둔다.
+   보정은 루트의 `data-social="on"`(매퍼가 찍음) 기준이다. */
+.header .hd_sns {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 91;
+  font-size: 0;
+  line-height: 0;
+}
+.header .hd_sns,
+.header .hd_sns * {
+  transition: none;
+}
+.header .hd_sns a {
+  display: inline-block;
+  vertical-align: middle;
+}
+.header .hd_sns a + a {
+  margin-left: 6px;
+}
+.header .hd_sns img {
+  display: block;
+  width: auto;
+  height: 26px;
+}
+.header.on .hd_sns {
+  right: 120px;
+}
+
+/* 상단 상태 보정. `.header *{transition:all .3s}` 때문에 로드 직후·스크롤 경계에서 메뉴 줄이
+   0.3초 동안 밀려 보이지 않도록 여백·위치는 바로 바꾸고 색만 전환한다. */
+[data-social='on'] .header .hd_lnb .hd_lnb02 {
+  transition-property: color, background-color, border-color;
+}
+[data-social='on'] .header:not(.on) .hd_lnb .hd_lnb02 {
+  margin-right: 78px;
+}
+[data-social='on'] .header:not(.on) .hd_lnb ul .depth1 .depth1_a {
+  padding: 0 0.75em;
+}
+
+/* aside 맨 아래 — 479px 이하에서만 보인다 (아래 미디어쿼리) */
+.aside .aside_sns {
+  display: none;
+}
+
+@media only screen and (max-width: 1280px) {
+  .header.on .hd_sns {
+    right: 114px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .header.on .hd_sns {
+    right: 107px;
+  }
+}
+@media only screen and (max-width: 1023px) {
+  .header.on .hd_sns {
+    right: 95px;
+  }
+}
+
+/* 861~1023 상단 상태: 위 보정만으로는 862px 에서 로고와 RESERVE 가 맞닿는다(넓은 로고는 겹침).
+   아이콘 22px, 메뉴 여백 0.5em, 밀기 64px, 로고를 32px 왼쪽으로 옮겨 가운데 공간을 좌우에 다시 나눈다. */
+@media only screen and (max-width: 1023px) and (min-width: 861px) {
+  [data-social='on'] .header:not(.on) .hd_sns img {
+    height: 22px;
+  }
+  [data-social='on'] .header:not(.on) .hd_lnb .hd_lnb02 {
+    margin-right: 64px;
+  }
+  [data-social='on'] .header:not(.on) .hd_lnb ul .depth1 .depth1_a {
+    padding: 0 0.5em;
+  }
+  [data-social='on'] .header:not(.on) .logo {
+    transform: translate(calc(-50% - 32px), -50%);
+  }
+}
+@media only screen and (max-width: 860px) {
+  .header .hd_sns,
+  .header.on .hd_sns {
+    right: 37px;
+  }
+  .header .hd_sns img {
+    height: 24px;
+  }
+}
+
+/* ── 헤더 YBS 버튼 (템플릿 확장) ─────────────────────────────────
+   property.ybsId 가 있을 때만 매퍼가 노출하고 루트에 data-ybs="on" 을 찍는다(마크업 기본 숨김).
+   원본(happynadri)처럼 스크롤 상태(.header.on)에서 예약하기와 같은 모양으로 맨 오른쪽에 붙고,
+   예약하기는 YBS 폭 + 10px 만큼 왼쪽으로 비킨다. 네이버·인스타그램(.hd_sns)도 그만큼 더 민다.
+   YBS 폭은 예약하기 글자 크기·여백 반응형(16/15/14px, 1023px 이하 여백 1.2em)을 따라 바뀌어 구간별로 맞춘다.
+   860px 이하는 두 버튼 모두 숨으므로(☰ 만) 그 위에서만 적용한다. */
+@media only screen and (min-width: 861px) {
+  [data-ybs='on'] .header .btn_hd_res:not(.btn_hd_ybs) {
+    right: 87px;
+  }
+  [data-ybs='on'] .header.on .hd_sns {
+    right: 207px;
+  }
+}
+@media only screen and (min-width: 861px) and (max-width: 1280px) {
+  [data-ybs='on'] .header .btn_hd_res:not(.btn_hd_ybs) {
+    right: 82px;
+  }
+  [data-ybs='on'] .header.on .hd_sns {
+    right: 196px;
+  }
+}
+@media only screen and (min-width: 861px) and (max-width: 1200px) {
+  [data-ybs='on'] .header .btn_hd_res:not(.btn_hd_ybs) {
+    right: 78px;
+  }
+  [data-ybs='on'] .header.on .hd_sns {
+    right: 185px;
+  }
+}
+@media only screen and (min-width: 861px) and (max-width: 1023px) {
+  [data-ybs='on'] .header .btn_hd_res:not(.btn_hd_ybs) {
+    right: 66px;
+  }
+  [data-ybs='on'] .header.on .hd_sns {
+    right: 161px;
+  }
+}
+
+/* 479px 이하: 왼쪽 로고가 자유 폭이라 긴 영문명·넓은 로고 이미지가 아이콘과 겹친다.
+   헤더에서는 숨기고 aside 맨 아래(LOCATION 아래, 30px 아이콘)에 보인다. */
+@media only screen and (max-width: 479px) {
+  .header .hd_sns {
+    display: none;
+  }
+  .aside .aside_sns {
+    display: block;
+    padding: 20px 25px;
+    font-size: 0;
+    line-height: 0;
+  }
+  .aside .aside_sns a {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .aside .aside_sns a + a {
+    margin-left: 10px;
+  }
+  .aside .aside_sns img {
+    display: block;
+    width: auto;
+    height: 30px;
+  }
+}
+
+/*** 하단 ***/
+.footer_wrap {
+  text-align: center;
+  word-break: keep-all;
+  padding: 30px 0;
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  border-top: 1px solid #ddd;
+}
+.footer_wrap a {
+  letter-spacing: -0.05em;
+}
+.footer_wrap .footer {
+  overflow: hidden;
+  text-align: center;
+}
+.footer_wrap .footer .tel {
+  font-size: 25px;
+  padding-bottom: 10px;
+  font-weight: 400;
+}
+.footer_wrap .footer .address {
+  font-size: 13px;
+  line-height: 2;
+  color: #777;
+}
+.footer_wrap .footer .address p {
+  display: inline-block;
+  margin: 0 1.15em;
+  color: inherit;
+}
+.footer_wrap .footer .address p:nth-of-type(1):before {
+  display: none;
+}
+.footer_wrap .privacy {
+  display: inline-block;
+  color: #777;
+  font-size: 13px;
+  border: 2px solid #ddd;
+  padding: 0 10px;
+}
+.footer_wrap .copy {
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.45;
+  margin-top: 0.5em;
+  color: #999;
+}
+.ft_btn_reserve.on {
+  position: fixed;
+  bottom: 80px;
+  right: 7px;
+  z-index: 999;
+}
+.ft_btn_reserve.on > a > img {
+  width: 75px;
+  height: 75px;
+}
+.ft_kakao {
+  position: fixed;
+  bottom: 30px;
+  z-index: 9;
+  background: transparent;
+  right: 30px;
+  width: 70px;
+}
+.ft_kakao img {
+  width: 100%;
+}
+
+@media only screen and (max-width: 1023px) {
+  .footer_wrap .btn_top {
+    display: none;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .footer_wrap {
+    padding: 0px 0 20px;
+  }
+  .footer_wrap .footer {
+    text-align: left;
+    padding: 13px 20px;
+  }
+  .footer_wrap .footer .address {
+    font-size: 12px;
+  }
+  .footer_wrap .footer .address p {
+    margin: 0 10px 0 0;
+  }
+  .footer_wrap .privacy {
+    font-size: 12px;
+  }
+  .footer_wrap .copy {
+    text-align: left;
+    border-top: 1px solid #e5e5e5;
+    padding: 10px 20px 0;
+  }
+  .ft_kakao {
+    bottom: 50px;
+    right: 10px;
+    width: 55px;
+  }
+  .ft_kakao.on {
+    bottom: 100px;
+  }
+}
+
+/*** 메인 ***/
+/* 메인 공통 */
+.btn_more {
+  font-size: 11px;
+  padding: 1.18em 4.5em 1.18em 1.8em;
+  letter-spacing: -0.02em;
+  display: inline-block;
+  border: 2px solid #ccc;
+  transition: all 0.3s;
+}
+/* 평소엔 회색 윤곽, hover 에서 테두리와 글씨가 함께 브랜드색이 된다 */
+.btn_more:hover {
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+#wrap .swiper-container {
+  overflow: hidden;
+}
+#wrap .swiper-button-prev,
+#wrap .swiper-button-next {
+  cursor: pointer;
+  margin-top: 0;
+  position: static;
+}
+#wrap .swiper-button-prev:after,
+#wrap .swiper-button-next:after {
+  display: none;
+}
+
+/* 메인 타이틀 */
+.title_box {
+  text-align: center;
+  padding: 130px 0 30px;
+}
+.title_box h3 {
+  font-size: 40px;
+  line-height: 1.125;
+  font-weight: 600;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+  color: #333;
+}
+.title_box p {
+  font-size: 14px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.42;
+  color: #999;
+}
+
+/* main_visual */
+.visual {
+  height: 100vh;
+  z-index: 0;
+  position: relative;
+}
+.visual .visual_box,
+.visual .visual_box .swiper-container,
+.visual .visual_box .swiper_slide {
+  height: 100vh;
+}
+.visual .visual_txt {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 55px);
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+.visual .visual_txt p,
+.visual .visual_txt strong,
+.visual .visual_txt span {
+  display: block;
+  color: #fff;
+}
+.visual .visual_txt span {
+  font-size: 15px;
+  line-height: 1.133;
+  letter-spacing: 1px;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+}
+.visual .visual_txt strong {
+  font-size: 75px;
+  line-height: 1.48;
+  letter-spacing: 3px;
+  display: block;
+  font-family: var(--font-en-main), var(--font-ko-main), sans-serif;
+}
+.visual .visual_txt p {
+  font-size: 16px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.5;
+}
+.visual .arw_box {
+  font-size: 0;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(50% + 55px);
+  margin-top: -47px;
+  z-index: 2;
+  height: 0;
+  text-align: center;
+}
+.visual .arw_box:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.visual .arw_box > div {
+  width: 60px;
+  height: 98px;
+  position: static;
+  margin-top: 0;
+}
+.visual .arw_box .swiper-button-prev {
+  float: left;
+}
+.visual .arw_box .swiper-button-next {
+  float: right;
+}
+.visual .scroll_down {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
+  z-index: 5;
+}
+.visual .scroll_down img {
+  display: inline-block;
+}
+
+/* main_special */
+.main_special {
+  position: relative;
+  z-index: 0;
+}
+.main_special:before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 50%;
+  background: #eff1f5;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+.main_special .swiper-container {
+  position: relative;
+  overflow: hidden;
+}
+.main_special .swiper-slide .link {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.main_special .swiper-slide .img {
+  height: 470px;
+}
+.main_special .swiper-slide .txt_box {
+  background: #fff;
+  padding: 15px 30px;
+  border: 1px solid #e5e5e5;
+  border-top: 0;
+  position: relative;
+  text-align: left;
+}
+.main_special .swiper-slide .txt_box .special_txt {
+  font-size: 13px;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+  line-height: 1.46;
+  font-weight: 300;
+  color: #999;
+  display: block;
+}
+.main_special .swiper-slide .txt_box strong {
+  font-size: 20px;
+  line-height: 1.5;
+  font-weight: 600;
+  display: block;
+  color: #444;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+}
+.main_special .swiper-slide .txt_box p {
+  font-size: 15px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.4;
+  color: #666;
+}
+.main_special .swiper-slide .txt_box a {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/* 부대시설 카드는 카드 전체(.swiper-slide)에 hover 해도 VIEW 버튼이 반응한다.
+   객실 카드는 그런 규칙이 없어 .btn_more:hover 만 걸리는데, 거기서는 테두리까지
+   함께 바뀐다. 두 카드의 hover 결과를 같게 맞추려면 여기에도 테두리를 준다. */
+.main_special .swiper-slide:hover .txt_box a {
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+.main_special .arw_box {
+  font-size: 0;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-top: 30px;
+  z-index: 2;
+  height: 0;
+  text-align: center;
+  width: 1400px;
+  transform: translate(-50%, -50%);
+}
+.main_special .arw_box:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+.main_special .arw_box > div {
+  width: auto;
+  display: block;
+}
+.main .main_special .arw_box > div {
+  background: none !important;
+}
+.main_special .arw_box .swiper-button-prev {
+  float: left;
+}
+.main_special .arw_box .swiper-button-next {
+  float: right;
+}
+
+/* main_room */
+.room_list {
+  position: relative;
+  text-align: center;
+}
+.room_list .box .img {
+  height: 540px;
+}
+.room_list .box .room_inner_wrap {
+  width: 1200px;
+  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  height: 100%;
+  z-index: 1;
+}
+.room_list .box .room_inner_wrap .room_inner_box {
+  position: absolute;
+  right: 0;
+  top: 65px;
+  background: #fff;
+  padding: 20px 30px 62px;
+  width: 260px;
+  text-align: left;
+  box-sizing: border-box;
+}
+.room_list .box .room_inner_wrap strong {
+  font-size: 27px;
+  line-height: 1.44;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #444;
+}
+.room_list .box .room_inner_wrap p {
+  font-size: 15px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.6;
+  margin-top: 5px;
+  color: #666;
+}
+.room_list .box .room_inner_wrap a {
+  font-size: 10px;
+  padding: 0.8em 2.6em 0.8em 1.6em;
+  margin-top: 3em;
+}
+.main_room .arw_box {
+  font-size: 0;
+  position: absolute;
+  left: 50%;
+  top: 274px;
+  width: 260px;
+  z-index: 10;
+  background: #fff;
+  margin-left: 340px;
+  border-top: 1px solid #e5e5e5;
+  box-sizing: border-box;
+}
+.main_room .arw_box > div {
+  display: inline-block;
+  vertical-align: middle;
+  width: 50%;
+  font-size: 13px;
+  line-height: 3;
+  box-sizing: border-box;
+  color: #9999b3;
+  position: static;
+  height: inherit;
+  margin-top: 0;
+}
+.main_room .arw_box > div:after {
+  display: none;
+}
+.main_room .arw_box .swiper-button-prev {
+  padding-left: 60px;
+  text-align: left;
+}
+.main_room .arw_box .swiper-button-next {
+  padding-right: 60px;
+  text-align: right;
+}
+
+/* main_landscape */
+.main_landscape {
+  margin-bottom: 130px;
+}
+.landscape_box {
+  font-size: 0;
+}
+.landscape_box .img_box,
+.landscape_box .txt_box {
+  display: inline-block;
+  width: 50%;
+  box-sizing: border-box;
+  vertical-align: middle;
+}
+.landscape_box .img_box {
+  height: 370px;
+}
+.landscape_box .txt_box {
+  padding-left: 4%;
+}
+.landscape_box .txt_box strong {
+  font-size: 23px;
+  line-height: 0.86;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #555;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+  display: block;
+}
+.landscape_box .txt_box p {
+  font-size: 15px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.5;
+  color: #666;
+}
+.landscape_box .txt_box .btn_more {
+  margin: 2.27em 0 5.45em;
+}
+.landscape_box .txt_box ul {
+  font-size: 0;
+}
+.landscape_box .txt_box ul li {
+  width: calc(33.3% - 1.333%);
+  display: inline-block;
+  vertical-align: middle;
+}
+.landscape_box .txt_box ul li + li {
+  margin-left: 2%;
+}
+
+/* main_reserve */
+.main_reserve {
+  background: var(--color-primary);
+  padding: 0 0 130px;
+}
+.reserve_box {
+  font-size: 0;
+  overflow: hidden;
+}
+.reserve_box .txt_box,
+.reserve_box .img_box {
+  display: inline-block;
+  vertical-align: middle;
+}
+.reserve_box .txt_box {
+  width: 35%;
+  float: left;
+}
+.reserve_box .txt_box strong {
+  font-size: 23px;
+  line-height: 1.15;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #444;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+  display: block;
+}
+.reserve_box .txt_box p {
+  font-size: 15px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.5;
+  color: #666;
+}
+.reserve_box .txt_box .btn_wrap {
+  margin-top: 65px;
+  font-size: 0;
+  text-align: left;
+}
+.reserve_box .txt_box .btn_wrap:before {
+  display: none;
+}
+.reserve_box .txt_box .btn_wrap a {
+  font-size: 13px;
+  padding: 0 4.76em 0 1.53em;
+  letter-spacing: -0.02em;
+  line-height: 3;
+  font-weight: 500;
+  color: #555;
+  border: 2px solid #ccc;
+  background: url('../images/common/spe_view.png') no-repeat 84% 50%;
+  transition: all 0.3s;
+  display: inline-block;
+  vertical-align: middle;
+}
+.reserve_box .txt_box .btn_wrap a:hover {
+  color: var(--color-secondary);
+  border-color: var(--color-secondary);
+}
+.reserve_box .txt_box .btn_wrap a + a {
+  margin-left: 10px;
+  padding: 0 3.84em 0 1.53em;
+}
+.reserve_box .img_box {
+  width: 65%;
+  height: 350px;
+  float: right;
+}
+
+@media only screen and (max-width: 1450px) {
+  /* main_visual */
+  .visual,
+  .visual .visual_box,
+  .visual .visual_box .swiper-container,
+  .visual .visual_box .swiper_slide {
+    height: 700px;
+  }
+  .visual .arw_box {
+    margin-top: -40px;
+  }
+  .visual .arw_box > div {
+    height: 80px;
+    width: 50px;
+  }
+
+  /* main_special */
+  .main_special .arw_box {
+    width: 100%;
+    padding: 0;
+    box-sizing: border-box;
+    margin-top: 70px;
+  }
+  .main_special .arw_box > div img {
+    height: 60px;
+  }
+  .main_special .swiper-container {
+    width: calc(100% - 90px);
+    margin: 0 auto;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  /* main_visual */
+  .visual,
+  .visual .visual_box,
+  .visual .visual_box .swiper-container,
+  .visual .visual_box .swiper_slide {
+    height: 600px;
+  }
+  .visual .visual_txt,
+  .visual .arw_box {
+    top: calc(50% + 50px);
+  }
+  .visual .visual_txt strong {
+    font-size: 60px;
+  }
+  .visual .visual_txt p {
+    font-size: 14px;
+  }
+  .visual .scroll_down img {
+    height: 60px;
+  }
+
+  /* main_room */
+  .room_list .box .room_inner_wrap {
+    width: 100%;
+  }
+  .room_list .box .room_inner_wrap .room_inner_box {
+    right: 30px;
+  }
+  .main_room .arw_box {
+    margin-left: 0;
+    left: inherit;
+    right: 30px;
+  }
+
+  /* main_landscape */
+  .main_landscape {
+    margin-bottom: 100px;
+  }
+}
+@media only screen and (max-width: 1023px) {
+  /* 메인 타이틀 */
+  .title_box h3 {
+    font-size: 30px;
+  }
+
+  /* 메인 타이틀 */
+  .title_box {
+    padding: 100px 0 30px;
+  }
+  .title_box h3 {
+    font-size: 35px;
+  }
+
+  /* main_visual */
+  .visual,
+  .visual .visual_box,
+  .visual .visual_box .swiper-container,
+  .visual .visual_box .swiper_slide {
+    height: 550px;
+  }
+  .visual .visual_txt,
+  .visual .arw_box {
+    top: calc(50% + 30px);
+  }
+  .visual .arw_box {
+    margin-top: -30px;
+  }
+  .visual .arw_box > div {
+    height: 60px;
+    width: 40px;
+  }
+
+  /* main_special */
+  .main_special .swiper-slide .img {
+    height: 400px;
+  }
+
+  /* main_room */
+  .room_list .box .img {
+    height: 500px;
+  }
+  .room_list .box .room_inner_wrap strong {
+    font-size: 22px;
+  }
+  .main_room .arw_box {
+    top: 267px;
+  }
+
+  /* main_landscape */
+  .main_landscape {
+    margin-bottom: 80px;
+  }
+  .landscape_box .txt_box {
+    padding-left: 20px;
+  }
+
+  /* main_reserve */
+  .main_reserve {
+    padding: 0 0 100px;
+  }
+  .reserve_box .img_box {
+    height: 300px;
+  }
+  .reserve_box .txt_box strong {
+    font-size: 22px;
+  }
+  .reserve_box .txt_box p {
+    font-size: 14px;
+  }
+  .reserve_box .txt_box .btn_wrap {
+    margin-top: 50px;
+  }
+}
+@media only screen and (max-width: 860px) {
+  /* 메인 공통 */
+  .btn_more {
+    padding: 0.81em 2em 0.72em 1.18em;
+  }
+
+  /* 메인 타이틀 */
+  .title_box {
+    padding: 80px 0 30px;
+  }
+  .title_box h3 {
+    font-size: 30px;
+  }
+
+  /* main_visual */
+  .visual,
+  .visual .visual_box,
+  .visual .visual_box .swiper-container,
+  .visual .visual_box .swiper_slide {
+    height: 470px;
+  }
+  .visual .visual_txt strong {
+    font-size: 50px;
+  }
+  .visual .scroll_down {
+    display: none;
+  }
+
+  /* main_special */
+  .main_special .swiper-slide .img {
+    height: 300px;
+  }
+
+  /* main_room */
+  .room_list .box .img {
+    height: 450px;
+  }
+  .room_list .box .room_inner_wrap strong {
+    font-size: 20px;
+  }
+  .main_room .arw_box {
+    top: 263px;
+  }
+
+  /* main_landscape */
+  .main_landscape {
+    margin-bottom: 60px;
+  }
+
+  /* main_reserve */
+  .main_reserve {
+    padding: 0 0 80px;
+  }
+  .reserve_box .img_box {
+    height: 280px;
+  }
+  .reserve_box .txt_box {
+    width: 40%;
+  }
+  .reserve_box .txt_box strong {
+    font-size: 18px;
+  }
+  .reserve_box .txt_box p {
+    font-size: 14px;
+  }
+  .reserve_box .txt_box .btn_wrap {
+    margin-top: 40px;
+  }
+  .reserve_box .img_box {
+    width: 60%;
+  }
+}
+@media only screen and (max-width: 767px) {
+  /* main_landscape */
+  .landscape_box .img_box,
+  .landscape_box .txt_box {
+    width: 100%;
+  }
+  .landscape_box .img_box {
+    height: 0;
+    padding-bottom: 58.4%;
+  }
+  .landscape_box .txt_box {
+    padding-left: 0;
+    padding-top: 20px;
+  }
+  .landscape_box .txt_box strong {
+    font-size: 18px;
+  }
+  .landscape_box .txt_box p {
+    font-size: 14px;
+  }
+  .landscape_box .txt_box .btn_more {
+    margin: 1.36em 0 2.7em;
+  }
+
+  /* main_reserve */
+  .main_reserve {
+    padding: 0 0 60px;
+  }
+  .reserve_box .txt_box,
+  .reserve_box .img_box {
+    width: 100%;
+    float: inherit;
+  }
+  .reserve_box .img_box {
+    height: 220px;
+  }
+  .reserve_box .txt_box {
+    padding-top: 15px;
+  }
+  .reserve_box .txt_box .btn_wrap {
+    margin-top: 30px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  /* 메인 타이틀 */
+  .title_box {
+    padding: 60px 0 15px;
+  }
+  .title_box h3 {
+    font-size: 24px;
+  }
+
+  /* main_visual */
+  .visual,
+  .visual .visual_box,
+  .visual .visual_box .swiper-container,
+  .visual .visual_box .swiper_slide {
+    height: 340px;
+  }
+  .visual .visual_txt span {
+    display: none;
+  }
+  .visual .visual_txt strong {
+    font-size: 27px;
+  }
+  .visual .visual_txt p {
+    font-size: 13px;
+  }
+  .visual .arw_box {
+    margin-top: -25px;
+  }
+  .visual .arw_box > div {
+    height: 50px;
+  }
+
+  /* main_special */
+  .main_special .swiper-container {
+    width: 100%;
+  }
+  .main_special .swiper-slide .img {
+    height: 200px;
+  }
+  .main_special .swiper-slide .txt_box {
+    padding: 3% 5%;
+  }
+  .main_special .swiper-slide .txt_box strong {
+    font-size: 18px;
+  }
+  .main_special .swiper-slide .txt_box p {
+    font-size: 14px;
+  }
+  .main_special .swiper-slide .txt_box a {
+    right: 5%;
+  }
+  .main_special .arw_box {
+    margin-top: 60px;
+  }
+  .main_special .arw_box > div img {
+    height: 49px;
+  }
+
+  /* main_room */
+  .room_list {
+    padding-bottom: 20px;
+  }
+  .room_list .box .img {
+    height: 375px;
+  }
+  .room_list .box .room_inner_wrap {
+    width: 100%;
+  }
+  .room_list .box .room_inner_wrap .room_inner_box {
+    right: inherit;
+    left: 50%;
+    top: initial;
+    bottom: 10px;
+    padding: 15px 5% 50px;
+    width: 80%;
+    transform: translateX(-50%);
+    border: 1px solid #e5e5e5;
+    border-bottom: 0;
+  }
+  /* [템플릿 확장] VIEW 버튼이 우상단 absolute 라 긴 객실명이 버튼 밑으로 깔린다.
+     한 줄로 자르고 버튼 폭만큼 오른쪽을 비운다 (전체 이름은 strong[title] 툴팁). */
+  .room_list .box .room_inner_wrap strong {
+    display: block;
+    font-size: 16px;
+    padding-right: 70px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .room_list .box .room_inner_wrap p {
+    font-size: 13px;
+  }
+  .room_list .box .room_inner_wrap a {
+    font-size: 11px;
+    padding: 9px 23px 8px 13px;
+    position: absolute;
+    right: 5%;
+    top: 14px;
+    margin-top: 0;
+  }
+  .main_room .arw_box {
+    top: inherit;
+    bottom: 0;
+    width: 80%;
+    margin-left: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid #e5e5e5;
+  }
+  .main_room .arw_box .swiper-button-prev {
+    padding-left: 0;
+    padding-right: 5%;
+    text-align: right;
+  }
+  .main_room .arw_box .swiper-button-next {
+    padding-right: 0;
+    padding-left: 5%;
+    text-align: left;
+  }
+
+  /* main_landscape */
+  .main_landscape {
+    margin-bottom: 40px;
+  }
+  .landscape_box .txt_box ul li {
+    width: calc(50% - 2%);
+  }
+  .landscape_box .txt_box ul li:last-of-type {
+    display: none;
+  }
+
+  /* main_reserve */
+  .reserve_box .img_box {
+    height: 180px;
+  }
+  .reserve_box .txt_box .btn_wrap {
+    margin-top: 15px;
+  }
+  .reserve_box .txt_box .btn_wrap a {
+    font-size: 12px;
+    padding: 0 2.75em 0 1.08em;
+  }
+  .reserve_box .txt_box .btn_wrap a + a {
+    padding: 0 2.75em 0 1.08em;
+  }
+}
+
+/*** 서브 ***/
+/* 서브 비주얼 */
+.sub_visual_wide {
+  height: 390px;
+  z-index: 2;
+  position: relative;
+}
+.sub_visual_wide:before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0.2;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+}
+.sub_visual_wide .visual_txt {
+  position: absolute;
+  z-index: 5;
+  left: 0;
+  right: 0;
+  top: calc(50% - -30px);
+  transform: translateY(-50%);
+  padding: 0 10px;
+  box-sizing: border-box;
+  text-align: center;
+}
+.sub_visual_wide .visual_txt strong {
+  font-size: 38px;
+  line-height: 1.13;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+}
+.sub_visual_wide .visual_txt p {
+  font-size: 14px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.42;
+  margin-top: 2px;
+  opacity: 0.9;
+  color: #fff;
+}
+.sub_visual .visual_txt {
+  top: inherit;
+  bottom: 12%;
+  width: 1200px;
+  padding: 0;
+  text-align: left;
+  transform: translate(-50%, 0%);
+}
+.sub_visual .visual_txt strong {
+  font-size: 65px;
+  line-height: 1.44;
+  margin-bottom: 15px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+}
+
+/* 서브 카테고리 */
+.sub_location_wrap {
+  margin-top: -78px;
+  position: relative;
+  z-index: 5;
+}
+.sub_visual + .sub_location_wrap {
+  margin-top: -48px;
+}
+.sub_location_wrap ul {
+  font-size: 0;
+}
+/* [템플릿 확장] 원본은 display:table + table-layout:fixed 라 칸 폭이 무조건
+   균등 분할된다. 객실 10개 + '미리보기' = 11칸을 1200px 에 나누면 칸당 ~109px 인데,
+   긴 객실명이 들어오면 3줄로 줄바꿈되어 탭 바 높이가 세 배가 된다.
+
+   flex + `flex:1 0 auto` 로 바꿔 두 경우를 모두 처리한다.
+     - 객실 적고 이름 짧음 → 칸이 늘어나 100% 를 채운다 (원본과 같은 모습)
+     - 객실 많거나 이름 긺 → 칸이 내용 폭을 지키고 가로 스크롤 (항상 한 줄)
+
+   원본도 640px 이하에서는 균등 분할을 포기하고 nowrap 으로 간다.
+   그 판단을 데스크톱까지 끌어올린 셈이다. overflow-x 만 원본에 없는데,
+   없으면 넘친 탭에 접근할 방법이 아예 없다. */
+.sub_location_wrap .cate_box {
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  background: #eee;
+}
+/* 넘칠 때만 보이는 스크롤바. 탭 바 자체가 얇아서(48px) 기본 스크롤바를 두면
+   트랙 배경·테두리가 탭 밑에 회색 띠처럼 남는다. 트랙은 투명하게 지우고
+   손잡이만 얇게 남긴다. */
+/* ⚠️ Chrome 121+ 는 scrollbar-width / scrollbar-color 가 지정되면
+   ::-webkit-scrollbar-* 의사요소를 통째로 무시한다. 그러면 손잡이 색을
+   우리가 못 잡고, 표준 scrollbar-color 의 hover 색은 브라우저가 자동으로
+   계산해서 CSS 로 고정할 방법이 없다(마우스를 올리면 검게 변한다).
+
+   그래서 표준 속성은 ::-webkit-scrollbar 를 모르는 브라우저(Firefox)에만 준다.
+   webkit 계열은 아래 의사요소 규칙을 쓴다. */
+@supports not selector(::-webkit-scrollbar) {
+  .sub_location_wrap .cate_box {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.25) transparent;
+  }
+}
+.sub_location_wrap .cate_box::-webkit-scrollbar {
+  /* 잡는 영역은 10px 로 넉넉히 준다. 실제로 보이는 손잡이 두께는
+     아래 -thumb 의 투명 테두리로 4px 까지 줄인다. */
+  height: 10px;
+  background: transparent;
+}
+.sub_location_wrap .cate_box::-webkit-scrollbar-track {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+/* 위아래 3px 씩 투명 테두리를 두고 배경을 content-box 로 잘라
+   "잡기 쉬운 10px + 보이기는 4px" 를 만든다.
+   테두리는 색이 없는 여백일 뿐이라 화면에 선으로 보이지 않는다. */
+.sub_location_wrap .cate_box::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  background-clip: content-box;
+  border: 3px solid transparent;
+  border-radius: 10px;
+}
+/* 브라우저 기본값은 손잡이에 마우스를 올리면 색을 진하게 바꾼다.
+   같은 값을 명시해 hover / 드래그 중에도 색이 변하지 않게 고정한다. */
+.sub_location_wrap .cate_box::-webkit-scrollbar-thumb:hover,
+.sub_location_wrap .cate_box::-webkit-scrollbar-thumb:active {
+  background: rgba(0, 0, 0, 0.25);
+  background-clip: content-box;
+}
+.sub_location_wrap .cate_box li {
+  display: block;
+  flex: 1 0 auto;
+  white-space: nowrap;
+  background: #eee;
+}
+.sub_location_wrap .cate_box li + li a {
+  border-left: 1px solid #dbdbdb;
+}
+.sub_location_wrap .cate_box li a {
+  font-size: 16px;
+  line-height: 3;
+  display: block;
+  text-align: center;
+  border-bottom: 0;
+  color: #666;
+  /* 칸이 내용 폭을 갖게 되어 좌우 여백이 필요하다 (원본 640px 이하 규칙과 같은 값) */
+  padding: 0 1.5em;
+  /* ⚠️ max-width 를 걸면 안 된다. 배경(.on 의 흰 면)과 좌측 구분선이 이 a 에
+     붙어 있어서, li 는 flex 로 늘어나는데 a 만 잘려 셀 오른쪽에 회색이 남는다.
+     이름이 길 때는 상한이 아니라 .cate_box 의 가로 스크롤이 처리한다. */
+}
+.sub_location_wrap .cate_box li a:hover {
+  text-decoration: underline;
+}
+/* 활성 탭은 흰 배경만으로는 약해 글자를 브랜드색으로 세운다.
+   배경까지 브랜드색으로 채우면 흰 글자로 뒤집어야 해 원본과 크게 달라진다. */
+.sub_location_wrap .cate_box li.on a {
+  background: #fff;
+  border-bottom: 1px solid #e5e5e5;
+  color: var(--color-secondary);
+  font-weight: 500;
+}
+.sub_location_wrap .location_box li,
+.sub_location_wrap .location_box li + li:before {
+  display: inline-block;
+  vertical-align: middle;
+}
+.sub_location_wrap .location_box {
+  margin-bottom: 20px;
+}
+.sub_location_wrap .location_box li,
+.sub_location_wrap .location_box li a {
+  font-size: 12px;
+  color: #fff;
+  text-shadow: 1px 1px 1px rgb(0 0 0 / 10%);
+  opacity: 0.8;
+}
+.sub_location_wrap .location_box li a {
+  font-weight: 800;
+  text-decoration: underline;
+}
+.sub_location_wrap .location_box li + li:before {
+  content: '';
+  margin: 0 20px 2px;
+  width: 5px;
+  height: 5px;
+  border: 1px solid #fff;
+  border-width: 1px 1px 0 0;
+  transform: rotate(45deg);
+}
+
+/* 서브 타이틀 */
+.sub_title_box {
+  text-align: center;
+  padding: 100px 0 30px;
+}
+.sub_title_box h3 {
+  font-size: 45px;
+  line-height: 1.13;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+  color: #444;
+}
+.sub_title_box h3.ff_notokr {
+  line-height: 1.3;
+}
+.sub_title_box h4 {
+  font-size: 33px;
+  line-height: 1.15;
+  font-weight: 600;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+  color: #444;
+}
+.sub_title_box p {
+  font-size: 14px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.42;
+  color: #999;
+}
+
+/* 서브 테이블 */
+.table_default {
+  border-collapse: collapse;
+  border-top: 2px solid var(--color-secondary);
+  border-bottom: 2px solid #ddd;
+  table-layout: fixed;
+}
+.table_default th,
+.table_default td {
+  font-size: 13px;
+  letter-spacing: -0.3px;
+  padding: 10px 0;
+  color: #888;
+  word-break: break-all;
+  transition: all 0.2s;
+  vertical-align: middle;
+  text-align: center;
+  box-sizing: border-box;
+  border-right: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+  background: #fff;
+}
+.table_default strong {
+  font-weight: 600;
+  color: #333;
+}
+.table_default .bg {
+  background: #fafafa;
+}
+.table_default tr:hover td {
+  color: #333;
+}
+.table_default thead th:last-of-type,
+.table_default tbody td:last-of-type {
+  border-right: 0;
+}
+.table_default thead th:nth-of-type(1),
+.table_default tbody td:nth-of-type(1) {
+  width: 100px;
+}
+.table_default thead th:nth-of-type(2),
+.table_default tbody td:nth-of-type(2) {
+  width: 80px;
+}
+.table_default thead th:nth-of-type(3),
+.table_default tbody td:nth-of-type(3) {
+  width: 200px;
+}
+.table_default thead th:nth-of-type(4),
+.table_default tbody td:nth-of-type(4) {
+  width: 70px;
+}
+.table_default tbody td:nth-of-type(1) {
+  font-size: 15px;
+  color: #333;
+}
+.table_text {
+  font-size: 13px;
+  padding: 20px 15px;
+  color: #666;
+}
+.table_text li {
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.5;
+  color: #666;
+}
+.table_text li:before {
+  content: '';
+  display: inline-block;
+  vertical-align: middle;
+  width: 2px;
+  height: 2px;
+  background: #666;
+  border-radius: 100%;
+  margin-right: 5px;
+}
+.table_text li + li {
+  margin-top: 5px;
+}
+.table_text li.point {
+  color: #b00;
+}
+.table_text li.point:before {
+  display: none;
+}
+.table_text strong {
+  font-weight: 600;
+}
+.btn_wrap {
+  text-align: center;
+  position: relative;
+}
+.btn_wrap:before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #e5e5e5;
+  position: absolute;
+  left: 0;
+  bottom: 20px;
+}
+.btn_wrap .btn_reserve {
+  font-size: 15px;
+  line-height: 3.13;
+  padding: 0 4em;
+  margin-top: 3.33em;
+  background: var(--color-secondary);
+  color: #fff;
+  transition: all 0.5s;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+}
+/* 기본이 브랜드색이므로 hover 는 어둡게 눌리는 쪽으로 간다.
+   (원본은 반대였다 — 기본 #444, hover 브랜드색) */
+.btn_wrap .btn_reserve:hover {
+  background: #444;
+}
+
+/* [템플릿 확장] 원본은 배치도가 항상 한 장이라 .wide_img 에 규칙이 없었다
+   (안의 img 는 reset.css 의 max-width:100% / vertical-align:middle 만 받는다).
+   숙소에 따라 동·층별로 여러 장을 올리므로 세로로 쌓고 사이 여백을 준다.
+   inline 인 채로 두면 두 장이 나란히 붙거나 줄바꿈 공백이 틈으로 남는다. */
+.wide_img img {
+  display: block;
+  margin: 0 auto;
+}
+.wide_img img + img {
+  margin-top: 20px;
+}
+
+/* sub_wide_bnr */
+.sub_wide_bnr {
+  height: 520px;
+  position: relative;
+}
+.sub_wide_bnr .txt_box {
+  width: 340px;
+  padding: 30px;
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  margin-left: 260px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.8);
+}
+.sub_wide_bnr .txt_box strong {
+  font-size: 25px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #444;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+  display: block;
+}
+.sub_wide_bnr .txt_box p {
+  font-size: 14px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.5;
+  margin-top: 15px;
+  color: #666;
+}
+
+/* sub_img_wrap */
+.sub_img_wrap .inner {
+  padding-top: 70px;
+  padding-bottom: 50px;
+}
+.title_box + .sub_img_wrap .inner {
+  padding-top: 0;
+}
+.sub_img_wrap ul {
+  font-size: 0;
+}
+.sub_img_wrap ul li {
+  display: inline-block;
+  vertical-align: middle;
+  height: 420px;
+  width: 67%;
+}
+.sub_img_wrap ul li + li {
+  margin-left: 1%;
+  width: 32%;
+}
+.sub_img_wrap.type1 ul li,
+.sub_img_wrap.type1 ul li + li {
+  width: calc(33.3% - 0.66%);
+}
+.sub_img_wrap.type2 ul li {
+  width: 32%;
+}
+.sub_img_wrap.type2 ul li + li {
+  width: 67%;
+}
+.sub_img_wrap.type3 ul li {
+  width: 100%;
+}
+.sub_img_wrap .txt {
+  margin-top: 15px;
+}
+.sub_img_wrap .txt strong {
+  font-size: 23px;
+  line-height: 1.3;
+  font-weight: 600;
+  color: #444;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+  letter-spacing: 1px;
+}
+.sub_img_wrap .txt p {
+  font-size: 15px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.4;
+  color: #666;
+}
+
+@media only screen and (max-width: 1450px) {
+  /* 서브 테이블 */
+  .table_default th,
+  .table_default td {
+    font-size: 13px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  /* 서브 테이블 */
+  .table_default thead th:nth-of-type(1),
+  .table_default tbody td:nth-of-type(1) {
+    width: 80px;
+  }
+  .table_default thead th:nth-of-type(2),
+  .table_default tbody td:nth-of-type(2) {
+    width: 80px;
+  }
+  .table_default thead th:nth-of-type(3),
+  .table_default tbody td:nth-of-type(3) {
+    width: 150px;
+  }
+
+  /* 서브 비주얼 */
+  .sub_visual_wide {
+    height: 320px;
+  }
+  .sub_visual_wide .visual_txt strong {
+    font-size: 32px;
+  }
+  .sub_visual .visual_txt {
+    width: 100%;
+    padding: 0 30px;
+  }
+  .sub_visual .visual_txt strong {
+    font-size: 55px;
+  }
+
+  /* sub_wide_bnr */
+  .sub_wide_bnr {
+    height: 500px;
+  }
+  .sub_wide_bnr .txt_box {
+    width: 340px;
+    padding: 28px;
+    left: inherit;
+    right: 30px;
+    margin-left: 0;
+  }
+  .sub_wide_bnr .txt_box strong {
+    font-size: 22px;
+  }
+
+  /* sub_img_wrap */
+  .sub_img_wrap .inner {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .sub_img_wrap ul li {
+    height: 0;
+    padding-bottom: 38.61%;
+  }
+  .sub_img_wrap .txt strong {
+    font-size: 21px;
+  }
+}
+@media only screen and (max-width: 1023px) {
+  /* 서브 타이틀 */
+  .sub_title_box h3 {
+    font-size: 40px;
+  }
+  .sub_title_box h4 {
+    font-size: 30px;
+  }
+
+  .table_box.for_pc {
+    display: none;
+  }
+  .table_box.for_m {
+    display: block;
+  }
+  .table_box.for_m .table_default thead th {
+    background: #fafafa;
+  }
+  .table_default thead th:nth-of-type(3),
+  .table_default tbody td:nth-of-type(3) {
+    width: 130px;
+  }
+
+  /* 서브 비주얼 */
+  .sub_visual_wide {
+    height: 300px;
+  }
+  .sub_visual_wide .visual_txt strong {
+    font-size: 28px;
+  }
+  .sub_visual .visual_txt strong {
+    font-size: 50px;
+  }
+
+  /* sub_wide_bnr */
+  .sub_wide_bnr {
+    height: 450px;
+  }
+  .sub_wide_bnr .txt_box {
+    width: 340px;
+    padding: 25px;
+  }
+  .sub_wide_bnr .txt_box strong {
+    font-size: 20px;
+  }
+}
+@media only screen and (max-width: 860px) {
+  /* 서브 타이틀 */
+  .sub_title_box {
+    padding: 80px 0 30px;
+  }
+  .sub_title_box h3 {
+    font-size: 35px;
+  }
+  .sub_title_box h4 {
+    font-size: 25px;
+  }
+
+  .table_default thead th:nth-of-type(1),
+  .table_default tbody td:nth-of-type(1) {
+    width: 80px;
+  }
+  .table_default tbody td:nth-of-type(1) {
+    font-size: 13px;
+  }
+  .btn_wrap .btn_reserve {
+    font-size: 14px;
+  }
+
+  /* 서브 비주얼 */
+  .sub_visual_wide {
+    height: 250px;
+  }
+  .sub_visual_wide .visual_txt {
+    top: calc(50% + 10px);
+  }
+  .sub_visual_wide .visual_txt strong {
+    font-size: 24px;
+  }
+  .sub_visual .visual_txt strong {
+    font-size: 40px;
+  }
+
+  /* 서브 카테고리 */
+  .sub_location_wrap {
+    margin-top: -75px;
+  }
+  .sub_location_wrap .cate_box li a {
+    font-size: 14px;
+  }
+  .sub_visual + .sub_location_wrap {
+    margin-top: -43px;
+  }
+
+  /* sub_wide_bnr */
+  .sub_wide_bnr {
+    height: 420px;
+  }
+  .sub_wide_bnr .txt_box {
+    width: 60%;
+    max-width: 400px;
+    padding: 20px;
+  }
+  .sub_wide_bnr .txt_box strong {
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  /* 서브 타이틀 */
+  .sub_title_box {
+    padding: 60px 0 15px;
+  }
+  .sub_title_box h3 {
+    font-size: 30px;
+  }
+  .sub_title_box h4 {
+    font-size: 21px;
+  }
+
+  .table_default {
+    border: 1px solid #ddd;
+    border-top: 2px solid var(--color-secondary);
+  }
+  .table_default th {
+    background: #f8f8f8;
+    font-weight: 600;
+    color: #333;
+  }
+  .table_default tbody td span {
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .table_default thead th:nth-of-type(1),
+  .table_default tbody td:nth-of-type(1) {
+    width: 200px;
+  }
+  .table_default tbody td:nth-of-type(1) {
+    font-size: 12px;
+    color: #888;
+  }
+  .table_default thead th,
+  .table_default tbody td,
+  .table_default thead th:nth-of-type(2),
+  .table_default tbody td:nth-of-type(2),
+  .table_default thead th:nth-of-type(3),
+  .table_default tbody td:nth-of-type(3),
+  .table_default thead th:nth-of-type(4),
+  .table_default tbody td:nth-of-type(4) {
+    width: auto;
+  }
+  .btn_wrap .btn_reserve {
+    line-height: 3;
+    padding: 0 2.5em;
+  }
+
+  /* 서브 비주얼 */
+  .sub_visual_wide {
+    height: 185px;
+  }
+  .sub_visual_wide .visual_txt {
+    top: calc(50% + 30px);
+  }
+  .sub_visual_wide .visual_txt strong {
+    font-size: 21px;
+  }
+  .sub_visual_wide .visual_txt p {
+    font-size: 13px;
+  }
+  .sub_visual .visual_txt {
+    bottom: 17%;
+    padding: 0 20px;
+  }
+  .sub_visual .visual_txt strong {
+    font-size: 30px;
+    margin-bottom: 10px;
+  }
+
+  /* 서브 카테고리 */
+  .sub_location_wrap {
+    margin-top: 0;
+    overflow-y: auto;
+  }
+  .sub_location_wrap .inner {
+    padding: 0;
+  }
+  .sub_location_wrap ul {
+    font-size: 0;
+  }
+  /* display 재정의는 걷어냈다 — 기본 규칙의 flex 가 이미 같은 일을 한다 */
+  .sub_location_wrap .cate_box li a {
+    font-size: 14px;
+    line-height: 3;
+    padding: 0 1.78em;
+  }
+  .sub_location_wrap .cate_box li.on a {
+    border-bottom: 0;
+  }
+  .sub_location_wrap .location_box {
+    display: none;
+  }
+  .sub_visual + .sub_location_wrap {
+    margin-top: -42px;
+  }
+
+  /* sub_wide_bnr */
+  .sub_wide_bnr {
+    height: 400px;
+  }
+  .sub_wide_bnr .txt_box {
+    width: 65%;
+    padding: 15px 20px;
+  }
+  .sub_wide_bnr .txt_box strong {
+    font-size: 17px;
+  }
+
+  /* sub_img_wrap */
+  .sub_img_wrap .inner {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .sub_img_wrap .txt {
+    margin-top: 10px;
+  }
+  .sub_img_wrap .txt strong {
+    font-size: 18px;
+  }
+  .sub_img_wrap .txt p {
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 479px) {
+  /* 서브 타이틀 */
+  .sub_title_box h3 {
+    font-size: 25px;
+  }
+
+  /* 서브 테이블 */
+  .table_default th,
+  .table_default td {
+    font-size: 12px;
+  }
+  .table_default thead th:nth-of-type(1),
+  .table_default tbody td:nth-of-type(1) {
+    width: 100px;
+  }
+
+  /* sub_wide_bnr */
+  .sub_wide_bnr .txt_box {
+    width: 80%;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .sub_wide_visual .visual_txt {
+    top: calc(50% + 25px);
+  }
+}
+
+/* about */
+.sub1_1 .sub_cont {
+  padding-bottom: 80px;
+}
+.sub1_1 .sub_img_wrap:nth-of-type(odd) {
+  background: var(--color-primary);
+}
+.sub1_2 .sub_img_wrap .inner {
+  padding-top: 0;
+}
+.sub1_2 .sub_img_wrap .txt strong {
+  font-size: 19px;
+  line-height: 1.57;
+  color: #aaa;
+}
+.sub1_2 .sub_img_wrap .txt p {
+  font-size: 12px;
+  line-height: 1.3;
+  margin-top: 5px;
+  color: #ccc;
+}
+.sub1_2 .sub_img_wrap.type3 .txt {
+  text-align: center;
+}
+.view_wide_bnr {
+  height: 460px;
+  position: relative;
+}
+.view_wide_bnr div {
+  padding: 30px 100px;
+  width: 340px;
+  height: 104px;
+  text-align: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(255, 255, 255, 0.8);
+}
+.view_wide_bnr div strong {
+  font-size: 32px;
+  line-height: 1.06;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #444;
+  font-family: var(--font-en-main), var(--font-ko-main), Arial, Helvetica, sans-serif;
+}
+.view_wide_bnr div p {
+  font-size: 15px;
+  line-height: 1.4;
+  margin-top: 1em;
+  color: #999;
+}
+
+@media only screen and (max-width: 1450px) {
+  .sub1_1 .sub_cont {
+    padding-bottom: 60px;
+  }
+  .sub1_2 .sub_img_wrap .txt strong {
+    font-size: 17px;
+  }
+  .view_wide_bnr {
+    height: 400px;
+  }
+  .view_wide_bnr div {
+    padding: 30px 80px;
+    width: 300px;
+    height: 100px;
+  }
+  .view_wide_bnr div strong {
+    font-size: 30px;
+  }
+}
+@media only screen and (max-width: 1023px) {
+  .view_wide_bnr {
+    height: 350px;
+  }
+  .view_wide_bnr div {
+    padding: 20px 50px;
+    width: 250px;
+    height: 80px;
+  }
+  .view_wide_bnr div strong {
+    font-size: 26px;
+  }
+}
+@media only screen and (max-width: 860px) {
+  .view_wide_bnr {
+    height: 300px;
+  }
+  .view_wide_bnr div strong {
+    font-size: 22px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .sub1_2 .sub_img_wrap .txt strong {
+    font-size: 15px;
+  }
+  .sub1_2 .sub_img_wrap .txt p {
+    font-size: 10px;
+  }
+  .view_wide_bnr {
+    height: 200px;
+  }
+  .view_wide_bnr div {
+    padding: 15px;
+    width: 230px;
+    height: 70px;
+  }
+  .view_wide_bnr div strong {
+    font-size: 20px;
+  }
+  .view_wide_bnr div p {
+    font-size: 14px;
+  }
+}
+
+/* room */
+.sub_room .main_room {
+  padding-bottom: 80px;
+}
+.sub_room .sub_location_wrap .inner {
+  width: 100%;
+  padding: 0;
+}
+.sub_room .sub_location_wrap .location_box {
+  width: 1200px;
+  margin: 0 auto 20px;
+}
+.sub2_1 .main_room .swiper-wrapper {
+  transform: none;
+  display: block;
+}
+.sub2_1 .room_list {
+  overflow: hidden;
+}
+.sub2_1 .room_list .arw_box {
+  display: none;
+}
+.sub2_1 .room_list .box {
+  float: left;
+  width: 48%;
+  margin-bottom: 50px;
+}
+.sub2_1 .room_list .box:nth-of-type(2n) {
+  margin-left: 2%;
+}
+.sub2_1 .room_list .box:nth-of-type(2n + 1) {
+  clear: both;
+}
+.sub2_1 .room_list .box .img {
+  height: 370px;
+}
+.sub2_1 .room_list .box .room_inner_wrap {
+  width: 100%;
+}
+.sub2_1 .room_list .box .room_inner_wrap .room_inner_box {
+  padding: 20px 25px;
+  width: 210px;
+  top: initial;
+  bottom: 15px;
+  right: 15px;
+}
+.sub2_1 .room_list .box .room_inner_wrap strong {
+  font-size: 23px;
+}
+.sub2_1 .room_list .box .room_inner_wrap a {
+  margin-top: 2em;
+  padding: 0.6em 2.4em 0.6em 1.4em;
+}
+.sub_room_detail .sub_title_box + .sub_img_wrap .inner,
+.sub_room_detail .type2 + .type3 .inner {
+  padding-top: 0;
+}
+.sub_room_detail .type2 + .type3 .inner {
+  padding-bottom: 100px;
+}
+.sub_room_detail .sub_img_wrap .txt {
+  text-align: center;
+}
+.sub_room_detail .sub_img_wrap .txt strong {
+  font-size: 19px;
+  line-height: 1.57;
+  color: #aaa;
+}
+.sub_room_detail .sub_img_wrap .txt p {
+  font-size: 12px;
+  line-height: 1.3;
+  margin-top: 5px;
+  color: #ccc;
+}
+.sub_room_detail .sub_img_wrap.type3 li {
+  height: 550px;
+}
+.sub_room_detail .sub_img_wrap.type2 .inner {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 50px;
+}
+.sub_room_detail_box {
+  background: var(--color-primary);
+}
+.sub_room_detail_box .room_list .box .room_inner_wrap {
+  width: 100%;
+}
+.sub_room_detail_box .room_list .box .img {
+  height: 250px;
+}
+.sub_room_detail_box .room_list .box .room_inner_wrap {
+  width: 100%;
+  transform: none;
+  position: static;
+}
+.sub_room_detail_box .room_list .box .room_inner_wrap .room_inner_box {
+  padding: 15px 20px 20px;
+  width: 100%;
+  top: initial;
+  bottom: 0;
+  right: 0;
+  position: relative;
+  border: 1px solid #e5e5e5;
+}
+.sub_room_detail_box .room_list .box .room_inner_wrap strong {
+  font-size: 20px;
+}
+.sub_room_detail_box .room_list .box .room_inner_wrap a {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-top: 0;
+  padding: 1.1em 2.9em 1.1em 1.9em;
+}
+.sub_room_detail_box .main_room .arw_box {
+  position: static;
+  margin: 50px auto;
+  background: transparent;
+  width: inherit;
+  display: inline-block;
+  border: 0;
+}
+.sub_room_detail_box .main_room .arw_box > div {
+  font-size: 0;
+  width: 48px;
+  height: 47px;
+  border: 1px solid #ddd;
+  transition: all 0.2s;
+  padding: 0;
+  background-position: 50% !important;
+}
+.sub_room_detail_box .main_room .arw_box > div:hover {
+  border: 1px solid #ccc;
+}
+.sub_room_detail_box .main_room .arw_box .swiper-button-next {
+  margin-left: 10px;
+}
+
+@media only screen and (max-width: 1450px) {
+  .sub_room_detail .sub_img_wrap .txt strong {
+    font-size: 17px;
+  }
+}
+@media only screen and (max-width: 1200px) {
+  .sub_room .sub_location_wrap .location_box {
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+  .sub_room_detail .sub_img_wrap.type3 li {
+    height: 0;
+    padding-bottom: 64.2%;
+  }
+  .sub_room_detail .type2 + .type3 .inner {
+    padding-bottom: 80px;
+  }
+}
+@media only screen and (max-width: 1023px) {
+  .sub2_1 .room_list .box {
+    margin-bottom: 30px;
+  }
+  .sub2_1 .room_list .box .img {
+    height: 350px;
+  }
+  .sub2_1 .room_list .box .room_inner_wrap .room_inner_box {
+    bottom: 25px;
+  }
+  .sub2_1 .room_list .box .room_inner_wrap strong {
+    font-size: 22px;
+  }
+  .sub2_1 .room_list .box .room_inner_wrap a {
+    margin-top: 2em;
+    padding: 0.6em 2.4em 0.6em 1.4em;
+  }
+}
+@media only screen and (max-width: 860px) {
+  .sub_room .sub_location_wrap .location_box {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .sub2_1 .room_list .box .room_inner_wrap strong {
+    font-size: 20px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .sub2_1 .room_list .box {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .sub2_1 .room_list .box:nth-of-type(2n) {
+    margin-left: 0;
+  }
+  .sub2_1 .room_list .box .img {
+    height: 300px;
+  }
+  .sub2_1 .room_list .box .room_inner_wrap {
+    position: static;
+    transform: none;
+  }
+  .sub2_1 .room_list .box .room_inner_wrap .room_inner_box {
+    padding: 15px 5% 20px;
+    width: 100%;
+    position: relative;
+    left: initial;
+    bottom: initial;
+    right: initial;
+    transform: none;
+    border: 1px solid #e5e5e5;
+  }
+  .sub2_1 .room_list .box .room_inner_wrap a {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .sub_room .sub_location_wrap {
+    overflow-y: auto;
+    width: 100%;
+    margin-top: 0;
+  }
+  .sub_room .sub_location_wrap .cate_box {
+    width: auto;
+    white-space: nowrap;
+  }
+  .sub_room .main_room {
+    padding-bottom: 50px;
+  }
+  .sub_room_detail .type2 + .type3 .inner {
+    padding-bottom: 50px;
+  }
+  .sub_room_detail .sub_img_wrap.type2 .inner {
+    margin-bottom: 30px;
+  }
+  .sub2_1 .room_list .box .img {
+    height: 250px;
+  }
+  .sub2_1 .room_list .box .room_inner_wrap strong {
+    font-size: 19px;
+  }
+  .sub_room_detail_box .room_list .box .room_inner_wrap .room_inner_box {
+    padding: 15px 15px 20px;
+  }
+  .sub_room_detail_box .room_list .box .room_inner_wrap strong {
+    font-size: 18px;
+  }
+  .sub_room_detail_box .room_list .box .room_inner_wrap a {
+    display: none;
+  }
+  .sub_room_detail_box .main_room .arw_box {
+    margin: 30px auto 0;
+    transform: none;
+  }
+}
+@media only screen and (max-width: 479px) {
+  .sub_room_detail .sub_img_wrap .txt strong {
+    font-size: 15px;
+  }
+  .sub_room_detail .sub_img_wrap .txt p {
+    font-size: 10px;
+  }
+  .sub2_1 .room_list .box .img {
+    height: 180px;
+  }
+  .sub2_1 .room_list .box .room_inner_wrap strong {
+    font-size: 18px;
+  }
+}
+
+/* special */
+.sub_special .sub_location_wrap .inner {
+  width: 100%;
+  padding: 0;
+}
+.sub_special .sub_location_wrap .location_box {
+  width: 1200px;
+  margin: 0 auto 20px;
+}
+.sub_special .main_special {
+  padding-bottom: 80px;
+}
+.sub3_1 .title_box {
+  padding: 100px 0 30px;
+}
+.sub3_1 .title_box h3 {
+  font-size: 45px;
+  color: #444;
+}
+.sub3_1 .main_special .swiper-wrapper {
+  transform: none;
+  display: block;
+}
+.sub3_1 .main_special {
+  overflow: hidden;
+}
+.sub3_1 .main_special:before {
+  display: none;
+}
+.sub3_1 .main_special .arw_box {
+  display: none;
+}
+.sub3_1 .main_special .box {
+  float: left;
+  width: 49%;
+  margin-bottom: 50px;
+}
+.sub3_1 .main_special .box:nth-of-type(2n) {
+  margin-left: 2%;
+}
+.sub3_1 .main_special .box:nth-of-type(2n + 1) {
+  clear: both;
+}
+.sub3_1 .main_special .box .img {
+  height: 370px;
+}
+.sub3_1 .main_special .box .txt_box {
+  padding: 20px 25px;
+  width: 178px;
+  bottom: 15px;
+  right: 15px;
+  position: absolute;
+}
+.sub3_1 .main_special .box .txt_box strong {
+  font-size: 23px;
+  word-break: break-all;
+}
+.sub3_1 .main_special .box .txt_box p .speical_txt {
+  display: inline-block;
+}
+.sub3_1 .main_special .box .txt_box a {
+  position: static;
+  transform: none;
+  font-size: 10px;
+  margin-top: 2.3em;
+  padding: 0.6em 2.4em 0.6em 1.4em;
+}
+.special_bnr .img {
+  height: 180px;
+}
+.special_bnr .txt_box {
+  text-align: center;
+}
+.special_bnr .txt_box strong {
+  font-size: 21px;
+  line-height: 1.42;
+  margin: 2.3em 0 0.47em;
+  font-weight: 500;
+  color: #444;
+  display: block;
+}
+.special_bnr .txt_box p {
+  font-size: 15px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.46;
+  color: #666;
+}
+/* [템플릿 확장] 배너 소제목(strong)에 대응하는 데이터 필드가 없어 비워 둔다.
+   원본에서는 그 strong 의 margin:2.3em 0 0.47em 이 사진 띠와 소개문 사이
+   간격을 만들고 있었으므로, 숨길 때는 p 가 그 간격을 대신 갖는다.
+   .no_title 은 facility-mapper 의 mapBanner 가 붙인다. */
+.special_bnr .txt_box.no_title p {
+  margin-top: 2.3em;
+}
+.sub_special_detail .sub_img_wrap .inner {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.sub_special_detail .sub_img_wrap + .sub_img_wrap .inner {
+  border-top: 1px solid #e5e5e5;
+  margin-bottom: 60px;
+}
+.sub_special_detail .main_special:before {
+  display: none;
+}
+.sub_special_detail .main_special .swiper-slide .img {
+  height: 250px;
+}
+.sub_special_detail .main_special .swiper-slide .txt_box a {
+  font-size: 10px;
+  padding: 1.1em 2.9em 1.1em 1.9em;
+}
+.sub_special_detail_box {
+  background: var(--color-primary);
+}
+.sub_special_detail_box .main_special {
+  text-align: center;
+  padding-bottom: 120px;
+}
+.sub_special_detail_box .main_special .arw_box {
+  position: static;
+  margin: 50px auto;
+  background: transparent;
+  width: inherit;
+  display: inline-block;
+  border: 0;
+  transform: none;
+}
+.sub_special_detail_box .main_special .arw_box > div {
+  font-size: 0;
+  width: 48px;
+  height: 47px;
+  border: 1px solid #ddd;
+  transition: all 0.2s;
+  padding: 0;
+}
+.sub_special_detail_box .main_special .arw_box > div img {
+  display: none;
+}
+.sub_special_detail_box .main_special .arw_box > div:hover {
+  border: 1px solid #ccc;
+}
+.sub_special_detail_box .main_special .arw_box .swiper-button-prev {
+  background: url('../images/common/room_pre.png') no-repeat 50% 50% #fff;
+}
+.sub_special_detail_box .main_special .arw_box .swiper-button-next {
+  background: url('../images/common/l_le.png') no-repeat 50% 50% #fff;
+  margin-left: 10px;
+}
+
+@media only screen and (max-width: 1450px) {
+  .sub_special .main_special .swiper-container {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 1023px) {
+  .sub3_1 .title_box h3 {
+    font-size: 35px;
+  }
+  .sub3_1 .main_special .box {
+    margin-bottom: 30px;
+  }
+  .sub3_1 .main_special .box .img {
+    height: 350px;
+  }
+  .special_bnr .txt_box strong {
+    font-size: 20px;
+  }
+  .sub_special_detail .sub_img_wrap + .sub_img_wrap .inner {
+    margin-bottom: 30px;
+  }
+}
+@media only screen and (max-width: 860px) {
+  .sub3_1 .title_box {
+    padding: 80px 0 30px;
+  }
+  .sub3_1 .title_box h3 {
+    font-size: 30px;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .sub3_1 .main_special .box {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  .sub3_1 .main_special .box:nth-of-type(2n) {
+    margin-left: 0;
+  }
+  .sub3_1 .main_special .box .img {
+    height: 350px;
+  }
+  .sub3_1 .main_special .box .txt_box {
+    padding: 13px 5% 18px;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+    top: initial;
+    bottom: initial;
+    left: initial;
+    right: initial;
+  }
+  .sub3_1 .main_special .box .txt_box strong {
+    font-size: 18px;
+  }
+  .sub3_1 .main_special .swiper-slide .txt_box .special_txt {
+    margin-bottom: 0;
+  }
+  .sub3_1 .main_special .box .txt_box a {
+    position: absolute;
+    font-size: 10px;
+    margin-top: 0;
+    padding: 0.9em 2.3em 0.8em 1.3em;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+@media only screen and (max-width: 640px) {
+  .sub3_1.sub_special .main_special {
+    padding-bottom: 30px;
+  }
+  .sub3_1 .title_box {
+    padding: 60px 0 15px;
+  }
+  .sub3_1 .title_box h3 {
+    font-size: 24px;
+  }
+  .sub3_1 .main_special .box .img {
+    height: 250px;
+  }
+  .sub_special .main_special .swiper-container {
+    width: 100%;
+  }
+  .special_bnr .txt_box strong {
+    font-size: 18px;
+    margin-top: 1.66em;
+  }
+  .special_bnr .txt_box p {
+    font-size: 14px;
+    margin-bottom: 1.42em;
+  }
+  .sub_special_detail .sub_img_wrap .inner {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .sub_special_detail .sub_img_wrap + .sub_img_wrap .inner {
+    margin-bottom: 0;
+  }
+  .sub_special_detail .main_special .swiper-slide .txt_box a {
+    display: none;
+  }
+  .sub_special_detail_box .main_special .swiper-slide .txt_box {
+    padding: 15px;
+  }
+  .sub_special_detail_box .main_special .arw_box {
+    margin: 30px auto 0;
+    transform: none;
+  }
+}
+@media only screen and (max-width: 479px) {
+  .sub3_1 .main_special .box .img {
+    height: 180px;
+  }
+}
+
+/* reservation */
+.sub_reserve .sub_cont {
+  padding-bottom: 130px;
+}
+.info_wrap dd {
+  position: relative;
+}
+.info_wrap dd .img {
+  width: 100%;
+  height: 380px;
+}
+.info_wrap dd p {
+  font-size: 14px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.5;
+  margin-bottom: 2.1em;
+  color: #666;
+}
+.info_wrap dd p strong {
+  font-size: 19px;
+  line-height: 1.57;
+  margin: 0.78em 0 10px;
+  display: block;
+  color: #444;
+}
+.info_wrap dd + dt {
+  border-top: 1px solid #e5e5e5;
+  padding-top: 50px;
+  margin-top: 50px;
+}
+.info_wrap dd + dt + dd p {
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 5px 30px 20px;
+  background: rgba(255, 255, 255, 0.8);
+  display: inline-block;
+  box-sizing: border-box;
+  color: #333;
+}
+
+@media only screen and (max-width: 1450px) {
+  .info_wrap dd .img {
+    height: 300px;
+  }
+  .info_wrap dd + dt + dd .img {
+    height: 400px;
+  }
+}
+@media only screen and (max-width: 1023px) {
+  .sub_reserve .sub_cont {
+    padding-bottom: 100px;
+  }
+  .info_wrap dd .img {
+    height: 250px;
+  }
+  .info_wrap dd p strong {
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width: 860px) {
+  .sub_reserve .sub_cont {
+    padding-bottom: 80px;
+  }
+  .info_wrap dd .img {
+    height: 200px;
+  }
+  .info_wrap dd p strong {
+    font-size: 17px;
+  }
+  .info_wrap dd + dt + dd p {
+    padding: 15px 5%;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .sub_reserve .sub_cont {
+    padding-bottom: 50px;
+  }
+  .info_wrap dd .img {
+    height: 150px;
+  }
+  .info_wrap dd p strong {
+    font-size: 16px;
+  }
+  .info_wrap dd + dt {
+    padding-top: 30px;
+    margin-top: 30px;
+  }
+}
+@media only screen and (max-width: 479px) {
+  .info_wrap dd + dt + dd p {
+    width: calc(100% - 30px);
+    right: 15px;
+  }
+}
+
+/* travel */
+.travel_list {
+  margin: 0 auto 60px;
+}
+.travel_list ul {
+  font-size: 0;
+  counter-reset: section;
+  overflow: hidden;
+}
+.travel_list ul li {
+  width: calc(50% - 2%);
+  margin-bottom: 70px;
+  float: left;
+  word-break: keep-all;
+}
+.travel_list ul li:nth-of-type(2n) {
+  margin-left: 4%;
+}
+.travel_list ul li:nth-of-type(2n + 1) {
+  clear: both;
+}
+/* [템플릿 확장] 원본은 width:100% 만 두고 업주가 비슷한 크기 사진을 올린다는
+   전제였다. 백오피스 사진은 비율이 제각각이라 2열 행의 높이가 들쭉날쭉해지고,
+   사진이 없을 때 세우는 placeholder(800x600)는 유독 높게 뜬다.
+   비율을 고정해 카드 이미지 높이를 맞춘다. */
+.travel_list ul li img {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+.travel_list ul li strong {
+  font-size: 19px;
+  line-height: 1.47;
+  padding: 0.78em 0 0.42em;
+  display: block;
+  border-bottom: 1px solid #e5e5e5;
+}
+.travel_list ul li strong:before {
+  counter-increment: section;
+  content: '0' counter(section) '.';
+  font-size: inherit;
+  color: inherit;
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 5px;
+}
+.travel_list ul li p {
+  font-size: 14px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.5;
+  margin-top: 10px;
+  color: #666;
+}
+.travel_list ul li p span {
+  font-size: 12px;
+  line-height: 1.75;
+  letter-spacing: -0.02em;
+  color: #999;
+  display: block;
+}
+.travel_list ul li p em {
+  font-size: 13px;
+  margin-top: 2.46em;
+  font-weight: 400;
+  display: block;
+  color: #333;
+}
+
+@media only screen and (max-width: 860px) {
+  .travel_list ul li {
+    width: calc(50% - 1%);
+    margin-bottom: 50px;
+  }
+  .travel_list ul li:nth-of-type(2n) {
+    margin-left: 2%;
+  }
+  .travel_list ul li strong {
+    font-size: 17px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .travel_list ul li {
+    width: 100%;
+    margin-bottom: 30px;
+  }
+  .travel_list ul li:nth-of-type(2n) {
+    margin-left: 0;
+  }
+  .travel_list ul li strong {
+    font-size: 16px;
+  }
+}
+
+/* traffic */
+
+.sub_traffic .sub_cont {
+  padding-bottom: 130px;
+}
+.map_box {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.map_box .map_inner {
+  position: relative;
+  height: 0;
+  padding-bottom: 35.8%;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  border-width: 1px 0;
+}
+/* [템플릿 확장] 원본은 daum roughmap 퍼가기 스크립트가 .map_inner
+   (padding-bottom 비율 상자) 안을 채웠다. 업체 고유 key 가 필요해 재현할 수 없어
+   Kakao Maps SDK 로 대체했고, 같은 비율 상자를 채우도록 좌표계를 맞춘다.
+   좌표가 없을 때 placeholder 가 보이도록 배경도 깔아 둔다. */
+.map_box .map_inner #kakao-map {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-primary);
+}
+.map_box .root_daum_roughmap {
+  width: 100% !important;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.map_info {
+  margin: 35px auto 0;
+}
+.map_info strong {
+  font-size: 19px;
+  line-height: 1.47;
+  padding-bottom: 10px;
+  margin-bottom: 1.57em;
+  border-bottom: 1px solid #e5e5e5;
+  display: block;
+}
+.map_info dl {
+  word-break: keep-all;
+}
+.map_info dl dt {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: #333;
+}
+.map_info dl dd {
+  font-size: 14px;
+  font-family: var(--font-ko-sub), sans-serif;
+  line-height: 1.5;
+  margin-top: 10px;
+  color: #666;
+}
+.map_info dl dd + dt {
+  margin-top: 1.875em;
+}
+
+@media only screen and (max-width: 1023px) {
+  .sub_traffic .sub_cont {
+    padding-bottom: 80px;
+  }
+  .map_box .map_inner {
+    padding-bottom: 50%;
+  }
+  .map_info {
+    margin: 20px auto 0;
+  }
+  .map_info strong {
+    font-size: 18px;
+  }
+  .map_info dl dt {
+    font-size: 15px;
+  }
+  .map_info dl dd {
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .sub_traffic .sub_cont {
+    padding-bottom: 50px;
+  }
+  .map_box .map_inner {
+    padding-bottom: 0;
+    height: 400px;
+  }
+  .map_info {
+    margin: 12px auto 0;
+  }
+  .map_info strong {
+    font-size: 16px;
+  }
+  .map_info dl dt {
+    font-size: 14px;
+  }
+  .map_info dl dd {
+    margin-top: 5px;
+  }
+}
+
+/* ============================================================
+   우측 하단 플로팅 버튼 — 상담하기 + 예약하기
+   ============================================================ */
+
+/* 예약하기(bottom:80px) 아래에 깔린다.
+   ⚠️ 노출 여부는 매퍼가 정한다 — 총판A(`partnerType === 'distributor_a'`)이고
+      `tripPropertyId` 가 있을 때만 뜬다. PC·모바일 모두 해당한다. */
+#talk_custom_button {
+  position: fixed;
+  right: 7px;
+  bottom: 6px;
+  cursor: pointer;
+  z-index: 999;
+}
+
+#talk_custom_button img {
+  width: 75px;
+  height: 75px;
+  display: block;
+}
+
+/* ⚠️ 상담하기가 빠지면(총판B / 판매대행 / tripPropertyId 없음) 예약하기 아래가
+   빈 채로 떠 있게 된다. 매퍼가 루트에 찍는 `data-consult` 로 바닥에 붙인다.
+   예약하기 자체는 파트너 타입과 무관하게 `.for_m` 미디어쿼리로만 갈린다. */
+[data-consult='off'] .ft_btn_reserve.on {
+  bottom: 6px;
+}
+
+/* ── 푸터 농어촌민박사업자 이미지 (템플릿 확장) ─────────────────────
+   customFields.footer.ruralStayMark 가 있을 때만 매퍼가 노출한다(마크업 기본 숨김).
+   푸터에 로고가 없어 푸터 맨 위(전화번호 위)에 독립된 줄로 둔다.
+   정렬은 푸터 텍스트를 따른다 — 데스크톱 가운데, 640px 이하 왼쪽.
+   표시마크 이미지는 세로형(마크 + 신고번호 박스)이라 폭을 고정(PC 180px / 모바일 160px)하고 높이는 비율에 맡긴다.
+   신고번호가 읽히도록 모바일에서도 160px 아래로 줄이지 않는다. */
+.footer_wrap .footer .ft_rural_stay_mark_wrap {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 16px;
+}
+.footer_wrap .footer .ft_rural_stay_mark {
+  display: block;
+  width: 180px;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+@media only screen and (max-width: 640px) {
+  .footer_wrap .footer .ft_rural_stay_mark {
+    width: 160px;
+  }
+}
+@media only screen and (max-width: 640px) {
+  .footer_wrap .footer .ft_rural_stay_mark_wrap {
+    justify-content: flex-start;
+    padding-bottom: 12px;
+  }
+}

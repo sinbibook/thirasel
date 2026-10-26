@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      html.tpl-loading body {
+        opacity: 0;
+      }
+      body {
+        opacity: 1;
+        transition: opacity 0.3s ease;
+      }
+    </style>
+    <script>
+      document.documentElement.classList.add('tpl-loading');
+      window.__tplReveal = function () {
+        document.documentElement.classList.remove('tpl-loading');
+      };
+      setTimeout(function () {
+        window.__tplReveal && window.__tplReveal();
+      }, 3000);
+    </script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta property="og:type" content="website" />
+    <title data-page-title>보령 티라셀 오션뷰 펜션 - 객실안내</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" type="text/css" href="styles/theme.css" />
+    <link rel="stylesheet" type="text/css" href="styles/reset.css" />
+    <link rel="stylesheet" type="text/css" href="styles/style.css" />
+    <link rel="stylesheet" type="text/css" href="styles/popup.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"
+    />
+    <!-- Open Graph Meta Tags for Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="보령 티라셀 오션뷰 펜션 - 객실안내" />
+  <meta property="og:description" content="바다와 함께 청량한 하루를 시작하는 보령 티라셀 오션뷰 펜션입니다. 전 객실 오션뷰엔 유명한 무창포 해수욕장이 펼쳐져 있습니다." />
+  <meta property="og:image" content="https://bookingplay-media.s3.amazonaws.com/item_images/2026/08/04/C0evJ43Hs26y.jpg" />
+  <meta property="og:url" content="https://thirasel.kr" />
+
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="보령 티라셀 오션뷰 펜션 - 객실안내" />
+  <meta name="twitter:description" content="바다와 함께 청량한 하루를 시작하는 보령 티라셀 오션뷰 펜션입니다. 전 객실 오션뷰엔 유명한 무창포 해수욕장이 펼쳐져 있습니다." />
+  <meta name="twitter:image" content="https://bookingplay-media.s3.amazonaws.com/item_images/2026/08/04/C0evJ43Hs26y.jpg" />
+  <meta name="naver-site-verification" content="f9d765be987eb11a5b87c35f4fa87b837d918b1f" />
+  <meta name="google-site-verification" content="kFdAp2rByTI9cLS4b0eUF4KNxJARBL4_2TMkH0nu5tc" />
+</head>
+
+  <body oncontextmenu="return false;" onselectstart="return false" ondragstart="return false;">
+    <div id="wrap">
+      <div id="header-wrap"></div>
+
+      <div id="container">
+        <!-- 원본 room.html?room_id= 의 상세 화면(#content.sub2_2)이다.
+             목록은 layout-map.html 로 분리했다. -->
+        <section id="content" class="sub2_2 sub_room sub_room_detail">
+          <!-- ── 히어로 (객실 사진 슬라이더) ─────────────────────── -->
+          <div class="sub_visual visual">
+            <div class="visual_txt">
+              <span data-property-name-en></span>
+              <strong class="ff_notokr" data-room-name></strong>
+              <p data-room-structure></p>
+            </div>
+            <div class="arw_box">
+              <div
+                class="swiper-button-prev"
+                style="
+                  background: url(images/common/left_btn.png) no-repeat 0 0;
+                  background-size: auto 100%;
+                "
+              ></div>
+              <div
+                class="swiper-button-next"
+                style="
+                  background: url(images/common/right_btn.png) no-repeat 100%;
+                  background-size: auto 100%;
+                "
+              ></div>
+            </div>
+            <div class="visual_box">
+              <div class="swiper-container">
+                <div class="swiper-wrapper" data-room-hero-slides></div>
+              </div>
+            </div>
+          </div>
+          <!--// sub_visual -->
+
+          <div class="sub_location_wrap">
+            <div class="inner">
+              <!-- 객실 탭. '미리보기' li 는 정적이고 뒤로 renderRoomNav 가 생성한다.
+                   현재 객실이 그룹(2실 이상)에 속하면 그 그룹의 형제 객실만 펼친다. -->
+              <ul class="cate_box" data-room-nav>
+                <li><a href="./layout-map.html">미리보기</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="sub_cont">
+            <div class="sub_title_box">
+              <h3 class="ff_notokr" data-room-name></h3>
+              <p data-room-structure></p>
+            </div>
+
+            <!-- ── 객실 정보 표 ──────────────────────────────── -->
+            <div class="table_box inner">
+              <div class="price_table for_pc">
+                <table cellspacing="0" cellpadding="0" class="table_default">
+                  <thead>
+                    <tr>
+                      <th style="width: 15%">객실명</th>
+                      <th style="width: 5%">기준</th>
+                      <th style="width: 5%">최대</th>
+                      <th style="width: 20%">유형</th>
+                      <th style="width: 20%">평형</th>
+                    </tr>
+                  </thead>
+                  <tbody data-room-table-pc></tbody>
+                </table>
+                <ul class="table_text" data-room-amenities></ul>
+              </div>
+
+              <div class="price_table for_m">
+                <table cellspacing="0" cellpadding="0" class="table_default">
+                  <tbody data-room-table-m></tbody>
+                </table>
+                <ul class="table_text" data-room-amenities></ul>
+              </div>
+
+              <div class="btn_wrap">
+                <a href="#!" target="_blank" class="btn_reserve" data-booking-link>예약하기</a>
+              </div>
+            </div>
+
+            <!-- ── 객실 상세 이미지 ──────────────────────────── -->
+            <div data-room-detail-heading>
+              <div class="sub_title_box"><h4>ROOM DETAIL</h4></div>
+            </div>
+            <div data-room-detail-blocks></div>
+
+            <!-- ── 평면도 — 데이터가 있을 때만 노출 ────────────── -->
+            <div data-room-floorplan>
+              <div class="sub_title_box"><h4>ROOM PLAN</h4></div>
+              <div class="wide_img" data-room-floorplan-images></div>
+            </div>
+
+            <!-- ── 다른 객실 목록 ────────────────────────────── -->
+            <div class="sub_room_detail_box">
+              <div class="inner">
+                <div class="main_room">
+                  <div class="title_box">
+                    <h3>ROOMS LIST</h3>
+                    <p data-room-list-lead></p>
+                  </div>
+                  <div class="room_list">
+                    <div class="swiper-container">
+                      <div class="swiper-wrapper" data-room-list-slides></div>
+                    </div>
+                    <div class="arw_box">
+                      <div
+                        class="swiper-button-prev"
+                        style="background: url(images/common/room_pre.png) no-repeat 25% 50% #fff"
+                      >
+                        Prev
+                      </div>
+                      <div
+                        class="swiper-button-next"
+                        style="background: url(images/common/l_le.png) no-repeat 75% 50% #fff"
+                      >
+                        Next
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--// sub_cont -->
+        </section>
+      </div>
+      <!--// container -->
+
+      <div id="footer-wrap"></div>
+    </div>
+
+    <div id="popup-container"></div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+    <script src="js/image-helpers.js"></script>
+    <script src="js/preview-handler.js"></script>
+    <script src="js/data-mapper/core/base-mapper.js"></script>
+    <script src="js/data-mapper/pages/header-footer-mapper.js"></script>
+    <script src="js/data-mapper/pages/room-mapper.js"></script>
+    <script src="js/header-footer-loader.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/pages/room.js"></script>
+    <script src="js/popup.js"></script>
+  </body>
+</html>

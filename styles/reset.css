@@ -1,0 +1,279 @@
+@charset "UTF-8";
+/* ============================================================
+   reset.css — t-template-H
+   원본: udosky.kr /css/reset.css (동일 계열 대조: gpcaravan.co.kr)
+
+   원본과의 차이 2가지만 둔다.
+   1) 폰트 로딩(@import Oswald + Noto Sans KR @font-face 6블록)을 제거했다.
+      웹폰트는 styles/theme.css 가 한 곳에서 @import 한다.
+   2) 하드코딩된 font-family 스택을 theme.css 토큰 + 폴백으로 바꿨다.
+   ============================================================ */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  color: #333;
+  font-family:
+    var(--font-ko-main), arial, helvetica, 'Malgun Gothic', '맑은 고딕', dotum, sans-serif;
+  letter-spacing: -0.07em;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+div,
+ul,
+ol,
+li,
+dl,
+dt,
+dd,
+form,
+fieldset,
+input,
+textarea,
+button,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+blockquote,
+iframe,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: none;
+}
+img {
+  border: 0 none;
+  vertical-align: middle;
+  max-width: 100%;
+}
+li {
+  list-style: none;
+}
+button {
+  background: transparent;
+  cursor: pointer;
+  vertical-align: middle;
+  margin: 0;
+}
+button,
+input[type='submit'],
+input[type='button'] {
+  background: transparent;
+  cursor: pointer;
+  *overflow: visible;
+}
+button span {
+  display: none;
+}
+input,
+button {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+  font-style: normal;
+}
+
+/* table */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+th {
+  vertical-align: middle;
+}
+th,
+td {
+  border-collapse: collapse;
+}
+legend,
+hr {
+  display: none;
+}
+caption {
+  text-indent: -9999em;
+  overflow: hidden;
+  height: 0;
+  font-size: 0;
+  line-height: 0;
+}
+
+/* form */
+form {
+  display: inline;
+}
+select,
+input,
+textarea {
+  color: #666;
+  font-family: var(--font-ko-main), 'Malgun Gothic', '맑은 고딕', dotum, sans-serif;
+  font-size: inherit;
+  vertical-align: middle;
+}
+fieldset,
+blockquote,
+iframe,
+button {
+  border: none;
+}
+
+/* font */
+i,
+em,
+u,
+cite {
+  font-style: normal;
+}
+em {
+  font-weight: bold;
+}
+
+/* link */
+a {
+  color: #666;
+  text-decoration: none;
+  cursor: pointer;
+}
+a:visited {
+  text-decoration: none;
+}
+a:focus {
+  text-decoration: none;
+}
+a:active {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: none;
+}

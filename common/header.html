@@ -1,0 +1,157 @@
+<header id="header" class="header">
+  <div class="hd_cont">
+    <div class="hd_inner">
+      <!-- 로고 이미지 / 텍스트(.logo_text 영문명, .logo_sub 한글명)는 header-footer-mapper 의
+           applyLogo 만 채우고 보인다. 기본 숨김 — 페이지를 옮길 때마다 헤더를 새로 붙이므로
+           매핑 전에 영문명이 잠깐 떴다가 로고 이미지로 바뀌는 깜박임을 막는다.
+           data-property-name-en 을 달지 않는 이유도 같다: 페이지 매퍼가 그 속성으로 영문명을
+           먼저 채워 버린다. -->
+      <div class="logo">
+        <a href="./index.html">
+          <img src="data:," alt="" data-logo-image style="display: none" />
+          <span class="logo_text" style="display: none"></span>
+          <span class="logo_sub" style="display: none"></span>
+        </a>
+      </div>
+      <div class="logo2">
+        <a href="./index.html">
+          <img src="data:," alt="" data-logo-image style="display: none" />
+          <span class="logo_text" style="display: none"></span>
+        </a>
+      </div>
+
+      <div class="hd_lnb" id="hd_lnb">
+        <ul class="hd_lnb01">
+          <li class="depth1">
+            <a href="./main.html" class="depth1_a">ABOUT</a>
+            <ul class="depth_box">
+              <li><a href="./main.html">펜션소개</a></li>
+            </ul>
+          </li>
+          <li class="depth1">
+            <a href="./layout-map.html" class="depth1_a" data-rooms-link>ROOMS</a>
+            <ul class="depth_box" data-rooms-submenu>
+              <li><a href="./layout-map.html" data-menu-id="layout-map">미리보기</a></li>
+            </ul>
+          </li>
+          <li class="depth1">
+            <a href="./facility.html" class="depth1_a">SPECIAL</a>
+            <ul class="depth_box" data-special-submenu></ul>
+          </li>
+        </ul>
+
+        <ul class="hd_lnb02">
+          <li class="depth1">
+            <a href="#!" class="depth1_a" target="_blank" data-booking-link>RESERVE</a>
+            <ul class="depth_box">
+              <li><a href="#!" target="_blank" data-booking-link>예약하기</a></li>
+              <li><a href="./reservation.html">이용안내</a></li>
+            </ul>
+          </li>
+          <li class="depth1" data-travel-menu>
+            <a href="./nearby-attractions.html" class="depth1_a">TRAVEL</a>
+            <ul class="depth_box">
+              <li>
+                <a href="./nearby-attractions.html" data-menu-id="nearby-attractions">주변여행지</a>
+              </li>
+            </ul>
+          </li>
+          <li class="depth1">
+            <a href="./directions.html" class="depth1_a">LOCATION</a>
+            <ul class="depth_box">
+              <li><a href="./directions.html">오시는길</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <!--// hd_lnb -->
+
+      <div class="btn_hd_res"><a href="#!" target="_blank" data-booking-link>예약하기</a></div>
+      <!-- MAPPER: property.ybsId → YBS(야놀자) 링크. 값 없으면 숨김 (기본 숨김 — 매핑 전 깜빡임 방지).
+           원본(happynadri)처럼 스크롤 상태(.header.on)에서 예약하기 오른쪽에 같은 모양으로 붙는다. -->
+      <div class="btn_hd_res btn_hd_ybs" data-ybs-wrap style="display: none">
+        <a href="#!" target="_blank" data-ybs-button>YBS</a>
+      </div>
+      <a href="#" class="btn_menu" aria-label="메뉴 열기">
+        <img src="images/common/menu_btn2.png" alt="" />
+      </a>
+
+      <!-- MAPPER: 네이버 ← homepage.socialLinks.blog / 인스타그램 ← homepage.socialLinks.instagram -->
+      <!-- 값 없으면 링크 숨김, 둘 다 없으면 래퍼째 숨김 (기본 숨김 — 매핑 전 깜빡임 방지).
+           위치는 CSS 가 상태별로 바꾼다: 상단 = LOCATION 오른쪽 / 스크롤(.on) = 예약하기 앞 /
+           860px 이하 = ☰ 앞 / 479px 이하 = 헤더에서 숨기고 aside 맨 아래(.aside_sns) -->
+      <div class="hd_sns" data-social-wrap style="display: none">
+        <a href="#!" data-homepage-socialLinks-blog style="display: none">
+          <img src="images/n_logo.png" alt="네이버" />
+        </a>
+        <a href="#!" data-homepage-socialLinks-instagram style="display: none">
+          <img src="images/insta_logo.png" alt="인스타그램" />
+        </a>
+      </div>
+    </div>
+  </div>
+  <!--// hd_cont -->
+
+  <div class="hd_lnb_bg"></div>
+
+  <div class="aside">
+    <!-- 닫기 아이콘(close.png)은 흰색이라 패널(흰 배경) 왼쪽의 어두운 aside_bg 위에 둬야 보인다.
+         원본처럼 .aside 직속으로 두되, 원본의 position:absolute 는 기준 조상이 없어 스크롤하면
+         문서 좌상단에 남으므로 CSS 에서 position:fixed 로 화면 좌상단에 붙인다.
+         (.aisde_inner 안에 넣으면 흰 배경 위 흰 아이콘이 되고 ABOUT 줄과 겹쳐 안 보인다) -->
+    <a
+      href="#"
+      class="btn_close"
+      aria-label="닫기"
+      style="background-image: url(images/common/close.png)"
+    ></a>
+    <div class="aisde_inner">
+      <!-- .aside_box 는 원본 CSS 에만 있고 마크업엔 없던 래퍼다 -->
+      <div class="aside_box">
+        <div class="depth1">ABOUT</div>
+        <ul class="depth_list">
+          <li><a href="./main.html">펜션소개</a></li>
+        </ul>
+
+        <div class="depth1">ROOMS</div>
+        <ul class="depth_list" data-rooms-submenu>
+          <li><a href="./layout-map.html" data-menu-id="layout-map">미리보기</a></li>
+        </ul>
+
+        <div class="depth1">SPECIAL</div>
+        <ul class="depth_list" data-special-submenu></ul>
+
+        <div class="depth1">RESERVE</div>
+        <ul class="depth_list">
+          <li><a href="#!" target="_blank" data-booking-link>예약하기</a></li>
+          <li><a href="./reservation.html">이용안내</a></li>
+        </ul>
+
+        <div class="depth1" data-travel-menu>TRAVEL</div>
+        <ul class="depth_list" data-travel-menu>
+          <li>
+            <a href="./nearby-attractions.html" data-menu-id="nearby-attractions">주변여행지</a>
+          </li>
+        </ul>
+
+        <div class="depth1">LOCATION</div>
+        <ul class="depth_list">
+          <li><a href="./directions.html">오시는길</a></li>
+        </ul>
+
+        <!-- 479px 이하 전용: 헤더(.hd_sns) 대신 aside 맨 아래에 보인다 (CSS 가 그 폭에서만 노출) -->
+        <!-- MAPPER: homepage.socialLinks.blog / .instagram — 값 없으면 링크·래퍼 숨김 (기본 숨김) -->
+        <div class="aside_sns" data-social-wrap style="display: none">
+          <a href="#!" data-homepage-socialLinks-blog style="display: none">
+            <img src="images/n_logo.png" alt="네이버" />
+          </a>
+          <a href="#!" data-homepage-socialLinks-instagram style="display: none">
+            <img src="images/insta_logo.png" alt="인스타그램" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--// aside -->
+  <div class="aside_bg"></div>
+</header>

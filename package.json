@@ -1,0 +1,28 @@
+{
+  "name": "t-template-h",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:html",
+    "lint:js": "eslint js/",
+    "lint:css": "stylelint styles/*.css",
+    "lint:html": "htmlhint *.html common/*.html",
+    "format": "prettier --write \"**/*.{js,css,html}\" --ignore-path .prettierignore",
+    "format:check": "prettier --check \"**/*.{js,css,html}\" --ignore-path .prettierignore"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "eslint": "^10.5.0",
+    "eslint-config-prettier": "^10.1.8",
+    "htmlhint": "^1.9.2",
+    "prettier": "^3.8.4",
+    "stylelint": "^17.13.0",
+    "stylelint-config-standard": "^40.0.0"
+  },
+  "dependencies": {
+    "jsdom": "^29.1.1"
+  }
+}
