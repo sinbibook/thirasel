@@ -505,6 +505,98 @@
     padding-left: 140px;
   }
 }
+
+/* ── 스크롤 상태 긴 숙소명 (템플릿 확장) ─────────────────────────
+   원본은 .logo2 를 왼쪽에 띄워 두고 메뉴를 고정 padding-left(235/215/160/140px)에서 시작했다.
+   숙소명이 그 칸보다 길면("가평 유명산고모네 애견동반 캠핑장" 1920 기준 375px) 메뉴와 겹친다.
+   .logo2 를 흐름에 넣어 칸 폭을 min-width 로 옮긴다 — 짧은 이름은 메뉴가 지금 자리 그대로,
+   긴 이름은 메뉴가 숙소명 뒤로 비킨다. 메뉴 오른쪽에는 예약하기·YBS·SNS 자리(--hd-reserve, 30px 여유 포함)를
+   margin 으로 남겨 두고, 그래도 넘치면 header-footer-mapper 의 fitScrollLogo 가 숙소명 글자를
+   줄여 한 줄에 맞춘다(최소 14px). 그 계산이 0.3초 글자 크기 전환 중간값을 재지 않도록 전환을 끈다.
+   860px 이하는 메뉴가 숨으므로 그 위에서만 적용한다. 상단 상태(.on 아님)는 손대지 않는다 —
+   .on 이 빠지면 바로 원래 absolute 로 돌아가 fadeOut 중에도 메뉴를 밀지 않는다. */
+@media only screen and (min-width: 861px) {
+  .header {
+    --hd-logo2-min: 235px;
+    --hd-reserve: 136px;
+  }
+  [data-ybs='on'] .header {
+    --hd-reserve: 223px;
+  }
+  [data-social='on'] .header {
+    --hd-reserve: 207px;
+  }
+  [data-ybs='on'][data-social='on'] .header {
+    --hd-reserve: 294px;
+  }
+  .header.on .hd_inner {
+    display: flex;
+    align-items: center;
+  }
+  .header.on .logo2 {
+    position: static;
+    transform: none;
+    flex: none;
+    box-sizing: border-box;
+    min-width: var(--hd-logo2-min);
+    padding-right: 20px;
+  }
+  .header.on .logo2 a,
+  .header.on .logo2 .logo_text {
+    white-space: nowrap;
+    transition: none;
+  }
+  .header.on .hd_lnb {
+    flex: none;
+    padding-left: 0;
+    margin-right: var(--hd-reserve);
+  }
+}
+@media only screen and (min-width: 861px) and (max-width: 1280px) {
+  .header {
+    --hd-logo2-min: 215px;
+    --hd-reserve: 130px;
+  }
+  [data-ybs='on'] .header {
+    --hd-reserve: 212px;
+  }
+  [data-social='on'] .header {
+    --hd-reserve: 201px;
+  }
+  [data-ybs='on'][data-social='on'] .header {
+    --hd-reserve: 283px;
+  }
+}
+@media only screen and (min-width: 861px) and (max-width: 1200px) {
+  .header {
+    --hd-logo2-min: 160px;
+    --hd-reserve: 123px;
+  }
+  [data-ybs='on'] .header {
+    --hd-reserve: 201px;
+  }
+  [data-social='on'] .header {
+    --hd-reserve: 194px;
+  }
+  [data-ybs='on'][data-social='on'] .header {
+    --hd-reserve: 272px;
+  }
+}
+@media only screen and (min-width: 861px) and (max-width: 1023px) {
+  .header {
+    --hd-logo2-min: 140px;
+    --hd-reserve: 111px;
+  }
+  [data-ybs='on'] .header {
+    --hd-reserve: 177px;
+  }
+  [data-social='on'] .header {
+    --hd-reserve: 182px;
+  }
+  [data-ybs='on'][data-social='on'] .header {
+    --hd-reserve: 248px;
+  }
+}
 @media only screen and (max-width: 860px) {
   /* [템플릿 확장] 원본은 padding:19px 0 으로 높이를 만들었다(19+22+19 = 60px).
      로고가 텍스트(22px)일 때는 맞지만, 백오피스 로고 이미지가 들어오면

@@ -1,8 +1,9 @@
 <div class="footer_wrap">
   <div class="footer">
-    <!-- data-* 속성 : data-footer-rural-stay-mark-wrap (customFields.footer.ruralStayMark 가 있을 때만 노출, 기본 숨김)
+    <!-- data-* 속성 : data-footer-rural-stay-mark-wrap (customFields.footer.ruralStayMarks 또는 기존 ruralStayMark 가 있을 때만 노출, 기본 숨김)
          data-footer-rural-stay-mark : 농어촌민박사업자 이미지 (표시마크 + 신고번호, alt = description) -->
     <div class="ft_rural_stay_mark_wrap" data-footer-rural-stay-mark-wrap style="display: none">
+      <img class="ft_rural_stay_mark" src="" alt="농어촌민박사업자" data-footer-rural-stay-mark />
       <img class="ft_rural_stay_mark" src="" alt="농어촌민박사업자" data-footer-rural-stay-mark />
     </div>
     <div class="tel">
@@ -33,6 +34,7 @@
         <a href="#!" target="_blank" data-ybs-button><span>야놀자 YBS</span></a>
       </p>
 
+      <a href="#" class="privacy" target="_blank" rel="noopener noreferrer" data-calendar-wrap data-calendar-link style="display: none">실시간 달력</a>
       <a
         href="http://design.trip11.net/privacy/privacy_policy.html"
         class="privacy"

@@ -23,6 +23,30 @@
     return v === undefined || v === null ? '' : String(v).trim();
   }
 
+  // 백오피스가 전달한 실시간 달력 링크가 http(s) URL일 때만 푸터에 노출한다.
+  function mapFooterCalendar(data) {
+    var homepageFields = data && data.homepage && data.homepage.customFields;
+    var fields = homepageFields || (data && data.customFields) || {};
+    var raw = fields.footer && fields.footer.calendarUrl;
+    var value = typeof raw === 'string' ? raw.trim() : '';
+    var valid = false;
+    if (/^https?:\/\//i.test(value)) {
+      try {
+        var parsed = new URL(value);
+        valid = (parsed.protocol === 'http:' || parsed.protocol === 'https:') && !!parsed.hostname;
+      } catch (error) {
+        valid = false;
+      }
+    }
+    document.querySelectorAll('[data-calendar-wrap]').forEach(function (el) {
+      el.style.display = valid ? '' : 'none';
+    });
+    document.querySelectorAll('[data-calendar-link]').forEach(function (el) {
+      if (valid) el.setAttribute('href', value);
+      else el.removeAttribute('href');
+    });
+  }
+
   function HeaderFooterMapper() {
     BaseDataMapper.call(this);
   }
@@ -40,8 +64,11 @@
     this.mapSpecialMenu();
     this.mapPageToggles();
     this.mapFooter();
+    mapFooterCalendar(this.data);
     // SEO: homepage.seo → title + description/keywords + 네이버/구글 사이트 인증 (전 페이지 공통)
     this.updateMetaTags();
+    // 예약하기·YBS·SNS 노출이 정해진 뒤라야 메뉴 오른쪽 여유(--hd-reserve)가 맞다
+    this.watchScrollLogo();
   };
 
   // 페이지 enabled 여부 (sections[0].enabled === false 이면 비활성)
@@ -118,6 +145,57 @@
     document.querySelectorAll('.logo, .logo2').forEach(function (host) {
       self.applyLogo(host, logoUrl, name, nameEn);
     });
+  };
+
+  // 스크롤 상태(.header.on) 숙소명(.logo2) 글자 맞춤.
+  // CSS 가 긴 숙소명 뒤로 메뉴를 밀고(style.css "스크롤 상태 긴 숙소명"), 그래도 메뉴가
+  // 예약하기·YBS·SNS 자리(.hd_lnb margin-right)를 침범하면 숙소명 글자를 줄여 한 줄에 맞춘다.
+  // 넓은 화면·짧은 이름은 넘치지 않으므로 CSS 글자 크기 그대로다.
+  // 폭(리사이즈·.on 전환)·로고 표시(fadeIn)·웹폰트 로드가 모두 크기 변화라 ResizeObserver 하나로 받는다.
+  HeaderFooterMapper.prototype.SCROLL_LOGO_MIN = 14;
+
+  HeaderFooterMapper.prototype.fitScrollLogo = function () {
+    var header = document.querySelector('.header');
+    var inner = header && header.querySelector('.hd_inner');
+    var link = header && header.querySelector('.logo2 a');
+    var text = link && link.querySelector('.logo_text');
+    var lnb = header && header.querySelector('.hd_lnb');
+    if (!inner || !text || !lnb) return;
+
+    link.style.fontSize = '';
+    if (!header.classList.contains('on') || !lnb.offsetWidth || !text.offsetWidth) return;
+
+    var size = parseFloat(getComputedStyle(link).fontSize);
+    for (var i = 0; i < 20; i++) {
+      var over =
+        lnb.getBoundingClientRect().right +
+        parseFloat(getComputedStyle(lnb).marginRight) -
+        inner.getBoundingClientRect().right;
+      if (over <= 0.5) return;
+      var width = text.getBoundingClientRect().width;
+      var next = Math.min(size - 1, Math.floor((size * (width - over)) / width));
+      next = Math.max(this.SCROLL_LOGO_MIN, next);
+      if (next >= size) return;
+      size = next;
+      link.style.fontSize = size + 'px';
+    }
+  };
+
+  HeaderFooterMapper.prototype.watchScrollLogo = function () {
+    var self = this;
+    var inner = document.querySelector('.header .hd_inner');
+    var logo2 = document.querySelector('.header .logo2');
+    if (!inner || !logo2) return;
+    // 미리보기는 데이터가 바뀔 때마다 mapPage 를 다시 부르므로 이전 관찰을 끊는다
+    if (global.__hdScrollLogoObserver) global.__hdScrollLogoObserver.disconnect();
+    if (typeof ResizeObserver === 'undefined') return;
+    var observer = new ResizeObserver(function () {
+      self.fitScrollLogo();
+    });
+    observer.observe(inner);
+    observer.observe(logo2);
+    global.__hdScrollLogoObserver = observer;
+    self.fitScrollLogo();
   };
 
   // MAPPER: favicon ← homepage.images[0].logo[isSelected].url
@@ -378,19 +456,31 @@
   // 프리뷰는 같은 페이지에서 다시 매핑하므로 매번 표시 상태를 되돌린다.
   HeaderFooterMapper.prototype.mapRuralStayMark = function () {
     var footer = this.getCustomFields().footer || {};
-    var mark = footer.ruralStayMark;
-    var markUrl = mark && mark.url ? String(mark.url) : '';
+    var footerMarks = footer;
+    var marks = Array.isArray(footerMarks.ruralStayMarks)
+      ? footerMarks.ruralStayMarks.slice(0, 2)
+      : [footerMarks.ruralStayMark];
+    var markUrl = marks.some(function (mark) { return mark && mark.url; });
 
     document.querySelectorAll('[data-footer-rural-stay-mark-wrap]').forEach(function (wrap) {
       wrap.style.display = markUrl ? '' : 'none';
     });
-    document.querySelectorAll('[data-footer-rural-stay-mark]').forEach(function (img) {
-      if (!markUrl) {
-        img.removeAttribute('src');
-        return;
-      }
-      img.src = markUrl;
-      img.alt = (mark.description && String(mark.description).trim()) || '농어촌민박사업자';
+    document.querySelectorAll('[data-footer-rural-stay-mark-wrap]').forEach(function (wrap) {
+      var images = wrap.querySelectorAll('[data-footer-rural-stay-mark]');
+      var count = marks.filter(function (mark) { return mark && mark.url; }).length;
+      images.forEach(function (img, index) {
+        var mark = marks[index];
+        var url = mark && mark.url ? String(mark.url) : '';
+        img.style.display = url ? 'inline-block' : 'none';
+        img.style.maxWidth = count > 1 ? 'calc((100% - 12px) / 2)' : '';
+        img.style.marginLeft = index && url && marks[0] && marks[0].url ? '12px' : '';
+        if (!url) {
+          img.removeAttribute('src');
+          return;
+        }
+        img.src = url;
+        img.alt = (mark.description && String(mark.description).trim()) || '농어촌민박사업자';
+      });
     });
   };
 
